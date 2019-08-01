@@ -7,6 +7,8 @@ import me.mmigas.Mines.MineController;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.Objects;
+
 public class AutoMines extends JavaPlugin {
 	private static AutoMines instance;
 
@@ -34,7 +36,8 @@ public class AutoMines extends JavaPlugin {
 
 
 	private void registerCommands(){
-		this.getCommand("AutoMinesCommand").setExecutor(new AutoMinesCommands());
+		Objects.requireNonNull(this.getCommand("AutoMines")).setExecutor(new AutoMinesCommands());
+
 	}
 
 	public MineController getMineController(){

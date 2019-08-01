@@ -16,21 +16,29 @@ import org.jetbrains.annotations.NotNull;
  class Create {
 
 	private final WorldEditPlugin worldEditPlugin;
+	private final MineController mineController;
 
-	 Create(WorldEditPlugin worldEditPlugin) {
+	 Create(WorldEditPlugin worldEditPlugin, MineController mineController) {
 		this.worldEditPlugin = worldEditPlugin;
+		this.mineController = mineController;
 	}
 
 	boolean onCommand(CommandSender commandSender, String[] args) {
 		if (!(commandSender instanceof Player)) {
-			commandSender.sendMessage("OLHA DEU MERDA");
+			commandSender.sendMessage(AutoMines.getInstance().getLanguageFiles().getLanguageConf().getString("PlayerCommand"));
 			return false;
 		}
 
 		Player player = (Player) commandSender;
 
-		if (args.length != 1) {
+		if (args.length != 2) {
 			player.sendMessage("Incorrect usage");
+			return false;
+		}
+
+		if(mineController.validatMine(args[1])){
+			player.sendMessage("Mine already exist");
+			return false;
 		}
 
 		Region selection = null;
@@ -41,14 +49,12 @@ import org.jetbrains.annotations.NotNull;
 		}
 
 		if (selection.getMinimumPoint() != null && selection.getMaximumPoint() != null) {
-			Location minLocation = new Location(player.getWorld(), selection.getMinimumPoint().getBlockX(), selection.getMinimumPoint().getBlockY(), selection.getMinimumPoint().getBlockZ());
-			Location maxLocation = new Location(player.getWorld(), selection.getMaximumPoint().getBlockX(), selection.getMaximumPoint().getBlockY(), selection.getMaximumPoint().getBlockZ());
-			AutoMines.getInstance().getMineController().createMine(args[0], player.getWorld(), minLocation, maxLocation);
+			mineController.createMine(args[1], player.getWorld(), selection.getMinimumPoint(), selection.getMaximumPoint());
 		} else {
-			AutoMines.getInstance().getMineController().createMine(args[0]);
+			mineController.createMine(args[1]);
 		}
 
-		player.sendMessage("Created");
+		player.sendMessage("Created " + args[1]);
 
 		return true;
 	}

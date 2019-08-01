@@ -4,24 +4,9 @@ description: A simple mine plugin
 api-version: 1.14
 version: 0.1 - Alpha
 commands:
-  automines:
-    description: Base command
+  AutoMines:
+    description: AutoMines Base plugin
+    usage: /AutoMines
 
-  create:
-    description: Creates mine with the name
-    usage: /AutoMines create {name}
 
-  delete:
-    description: Deletes a mine
-    usage: /AutoMines detele {name}
 
-  reset:
-    description: Forces a mine reset
-    usage: /AutoMines reset {name}
-
-  setArea:
-    description: Change the mine's area
-    usage: /AutoMines setArea {name}
-
-  help:
-    description: Shows all commands

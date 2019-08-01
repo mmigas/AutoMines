@@ -1,8 +1,10 @@
 package me.mmigas.Mines;
 
+import com.sk89q.worldedit.math.BlockVector3;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -16,7 +18,7 @@ public class MineController {
 		mines.add(new Mine(name));
 	}
 
-	public void createMine(String name, World world, Location minPosition, Location maxPosition) {
+	public void createMine(String name, World world, BlockVector3 minPosition, BlockVector3 maxPosition) {
 		mines.add(new Mine(name, world, minPosition, maxPosition));
 	}
 
@@ -24,12 +26,27 @@ public class MineController {
 		mines.remove(getMine(name));
 	}
 
-	public void setMineArea(String name, Location minPosition, Location maxPosition) {
+	public void setMineArea(String name, BlockVector3 minPosition, BlockVector3 maxPosition) {
 		Mine mine = getMine(name);
 		if (mine != null) {
 			mine.setMinPosition(minPosition);
 			mine.setMaxPosition(minPosition);
 		}
+	}
+
+	public void sendInfo(String name, CommandSender commandSender){
+		Mine mine = getMine(name);
+		commandSender.sendMessage(name + "'s info: ");
+		for (Map.Entry<Double, Material> entry: mine.getContent().entrySet()) {
+			commandSender.sendMessage(" - " + entry.getValue() + ": " + entry.getKey());
+		}
+
+		commandSender.sendMessage("Flags: ");
+
+		for(Flags flag: mine.getFlags()){
+			commandSender.sendMessage(" - " + flag);
+		}
+
 	}
 
 	public void changeBlock(String name, Material material, double percentage) {

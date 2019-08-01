@@ -11,6 +11,12 @@ import org.bukkit.inventory.ItemStack;
 
 class ChangeBlock {
 
+	private final MineController mineController;
+
+	ChangeBlock(MineController mineController){
+		this.mineController = mineController;
+	}
+
 	boolean onCommand(CommandSender commandSender, String[] args) {
 		if (!(commandSender instanceof Player)) {
 			LanguageManager.send(commandSender, LanguageManager.MUST_BE_A_PLAYER);
@@ -29,7 +35,7 @@ class ChangeBlock {
 			return false;
 		}
 
-		ItemStack itemHolding = player.getItemOnCursor();
+		ItemStack itemHolding = player.getInventory().getItemInMainHand();
 		if (!itemHolding.hasItemMeta()) {
 			LanguageManager.send(player, LanguageManager.EMPTY_HAND);
 			return false;
@@ -43,8 +49,8 @@ class ChangeBlock {
 			return false;
 		}
 
-		double percentage = Double.valueOf(args[0]);
-		AutoMines.getInstance().getMineController().changeBlock(args[0], itemHolding.getType(), percentage);
+		double percentage = Double.valueOf(args[2]);
+		mineController.changeBlock(args[2], itemHolding.getType(), percentage);
 		return true;
 	}
 }

@@ -15,7 +15,7 @@ import java.util.*;
 
 class Mine {
 	private String name;
-	private Location minPosition, maxPosition;
+	private BlockVector3 minPosition, maxPosition;
 	private World world;
 
 	private TreeMap<Double, Material> content = new TreeMap<>();
@@ -27,7 +27,7 @@ class Mine {
 		content.put(1.00, Material.AIR);
 	}
 
-	Mine(String name, World world, Location minPosition, Location maxPosition) {
+	Mine(String name, World world, BlockVector3 minPosition, BlockVector3 maxPosition) {
 		this.name = name;
 		this.minPosition = minPosition;
 		this.maxPosition = maxPosition;
@@ -36,9 +36,8 @@ class Mine {
 	}
 
 	void reset() {
-		BlockVector3 minBlock = BlockVector3.at(minPosition.getX(), minPosition.getY(), minPosition.getZ());
-		BlockVector3 maxBlock = BlockVector3.at(maxPosition.getX(), maxPosition.getY(), maxPosition.getZ());
-		CuboidRegion area = new CuboidRegion(minBlock, maxBlock);
+
+		CuboidRegion area = new CuboidRegion(minPosition, maxPosition);
 
 		ArrayList<Material> materialsGenerated = generatedMaterialsList();
 
@@ -46,9 +45,9 @@ class Mine {
 		for (int z = 0; z < area.getLength(); z++) {
 			for (int y = 0; y < area.getHeight(); y++) {
 				for (int x = 0; x < area.getWidth(); x++) {
-					int finalX = minBlock.getX() + x;
-					int finalY = minBlock.getY() + y;
-					int finalZ = minBlock.getZ() + z;
+					int finalX = minPosition.getX() + x;
+					int finalY = minPosition.getY() + y;
+					int finalZ = minPosition.getZ() + z;
 
 					world.getBlockAt(new Location(world, (double) finalX, (double) finalY, (double) finalZ)).setType(materialsGenerated.get(counter));
 					counter++;
@@ -59,22 +58,19 @@ class Mine {
 
 	private ArrayList<Material> generatedMaterialsList() {
 		ArrayList<Material> materials = new ArrayList<>();
-		new BukkitRunnable() {
-			@Override
-			public void run() {
-				Random random = new Random();
-				for (int i = 0; i < content.size(); i++) {
-					int probabilityGenerated = random.nextInt(1);
-					for (Map.Entry<Double, Material> entry : content.entrySet()) {
-						if (probabilityGenerated > entry.getKey()) {
-							materials.add(entry.getValue());
-							break;
-						}
-					}
+
+		Random random = new Random();
+		for (int i = 0; i < mineSize(); i++) {
+			int probabilityGenerated = random.nextInt(1);
+			AutoMines.getInstance().getLogger().info(probabilityGenerated + "");
+			for (Map.Entry<Double, Material> entry : content.entrySet()) {
+				if (probabilityGenerated < entry.getKey()) {
+					materials.add(entry.getValue());
+					break;
 				}
-				this.cancel();
 			}
-		}.runTask(AutoMines.getInstance());
+		}
+
 		return materials;
 	}
 
@@ -89,8 +85,13 @@ class Mine {
 		}.runTaskTimerAsynchronously(AutoMines.getInstance(), 0, periodInSec);
 	}
 
-	void stopTimerCooldown(){
+	void stopTimerCooldown() {
 		Bukkit.getScheduler().cancelTask(resetTask.getTaskId());
+	}
+
+	private int mineSize(){
+		CuboidRegion area = new CuboidRegion(minPosition, maxPosition);
+		return area.getArea();
 	}
 
 	String getName() {
@@ -105,11 +106,11 @@ class Mine {
 		return flags;
 	}
 
-	void setMinPosition(Location minPosition) {
+	void setMinPosition(BlockVector3 minPosition) {
 		this.minPosition = minPosition;
 	}
 
-	void setMaxPosition(Location maxPosition) {
+	void setMaxPosition(BlockVector3 maxPosition) {
 		this.maxPosition = maxPosition;
 	}
 

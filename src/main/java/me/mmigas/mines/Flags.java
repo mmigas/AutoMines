@@ -1,4 +1,4 @@
-package me.mmigas.Mines;
+package me.mmigas.mines;
 
 public enum Flags {
 

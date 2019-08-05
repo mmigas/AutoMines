@@ -1,56 +1,60 @@
-package me.mmigas.Commands;
+package me.mmigas.commands;
 
-import me.mmigas.AutoMines;
-import me.mmigas.Mines.MineController;
+
+import me.mmigas.language.LanguageManager;
+import me.mmigas.mines.Mine;
+import me.mmigas.mines.MineController;
 import com.sk89q.worldedit.IncompleteRegionException;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.Region;
-import net.royawesome.jlibnoise.module.combiner.Min;
-import org.bukkit.Location;
-import org.bukkit.command.Command;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 
 class SetArea {
 
-	private final WorldEditPlugin worldEditPlugin;
-	private final MineController mineController;
+    private final WorldEditPlugin worldEditPlugin;
+    private final MineController mineController;
 
-	SetArea(WorldEditPlugin worldEditPlugin, MineController mineController) {
-		this.worldEditPlugin = worldEditPlugin;
-		this.mineController = mineController;
-	}
+    SetArea(WorldEditPlugin worldEditPlugin, MineController mineController) {
+        this.worldEditPlugin = worldEditPlugin;
+        this.mineController = mineController;
+    }
 
-	boolean onCommand(CommandSender commandSender, String[] args) {
-		if (!(commandSender instanceof Player)) {
-			commandSender.sendMessage(AutoMines.getInstance().getLanguageFiles().getLanguageConf().getString("PlayerCommand"));
-			return false;
-		}
+    boolean onCommand(CommandSender commandSender, String[] args) {
+        if (!(commandSender instanceof Player)) {
+            LanguageManager.send(commandSender, LanguageManager.MUST_BE_A_PLAYER);
+            return false;
+        }
 
-		Player player = (Player) commandSender;
+        Player player = (Player) commandSender;
 
-		if (args.length != 2) {
-			player.sendMessage("Incorrect usage");
-		}
+        if (args.length != 2) {
+            LanguageManager.send(commandSender, LanguageManager.WRONG_RESET_TIMER_USAGE);
+        }
 
-		Region selection = null;
-		try {
-			selection = worldEditPlugin.getSession(player).getSelection(BukkitAdapter.adapt(player.getWorld()));
-		} catch (IncompleteRegionException e) {
-			e.printStackTrace();
-		}
+        if (!mineController.validateMine(args[1])) {
+            LanguageManager.send(commandSender, LanguageManager.MINE_NOT_FOUND);
+            return true;
+        }
 
-		if (selection.getMinimumPoint() != null && selection.getMaximumPoint() != null) {
-			mineController.setMineArea(args[1], selection.getMinimumPoint(), selection.getMaximumPoint());
-		} else {
-			player.sendMessage("DEFINE THE FUCKING AREA FIRST");
-		}
+        Mine mine = mineController.getMine(args[1]);
 
-		player.sendMessage("changed");
-		return true;
-	}
+        Region selection = null;
+        try {
+            selection = worldEditPlugin.getSession(player).getSelection(BukkitAdapter.adapt(player.getWorld()));
+        } catch (IncompleteRegionException e) {
+            e.printStackTrace();
+        }
+
+        if (selection != null && selection.getMinimumPoint() != null && selection.getMaximumPoint() != null) {
+            mineController.setMineArea(mine, selection.getMinimumPoint(), selection.getMaximumPoint());
+        } else {
+            player.sendMessage("DEFINE THE FUCKING AREA FIRST");
+        }
+
+        player.sendMessage("changed");
+        return true;
+    }
 }

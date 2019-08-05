@@ -1,8 +1,8 @@
 main: me.mmigas.AutoMines
-name: MinesPlugin
+name: AutoMines
 description: A simple mine plugin
 api-version: 1.14
-version: 0.1 - Alpha
+version: 0.1
 commands:
   AutoMines:
     description: AutoMines Base plugin

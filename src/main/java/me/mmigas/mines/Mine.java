@@ -1,19 +1,24 @@
 package me.mmigas.mines;
 
-import com.sk89q.worldedit.math.BlockVector3;
 import me.mmigas.AutoMines;
+import me.mmigas.events.MineResetEvent;
+import me.mmigas.math.BlockVector3D;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class Mine {
     private String name;
-    private BlockVector3 minPosition, maxPosition;
     private World world;
+    private BlockVector3D minPosition, maxPosition;
+    private Location teleportLocation;
 
     private List<Conteiner> conteiners = new ArrayList<>();
     private int total = 0;
@@ -25,25 +30,30 @@ public class Mine {
     private int height = 0;
     private int area = 0;
 
+    private int totalPercentage;
+    private int resetPercentage;
 
-    Mine(String name) {
+
+    public Mine(String name) {
         this.name = name;
+        totalPercentage = 100;
     }
 
-    Mine(String name, World world, BlockVector3 minPosition, BlockVector3 maxPosition) {
+    public Mine(String name, World world, BlockVector3D minPosition, BlockVector3D maxPosition) {
         this.name = name;
         this.minPosition = minPosition;
         this.maxPosition = maxPosition;
         this.world = world;
+        totalPercentage = 100;
         calculatedDimensions();
     }
 
     void reset() {
         ArrayList<Material> materialsGenerated = generatedMaterialsList();
         int counter = 0;
-        for (int z = 0; z < length; z++) {
-            for (int y = 0; y < height; y++) {
-                for (int x = 0; x < width; x++) {
+        for(int z = 0; z < length; z++) {
+            for(int y = 0; y < height; y++) {
+                for(int x = 0; x < width; x++) {
                     int finalX = minPosition.getX() + x;
                     int finalY = minPosition.getY() + y;
                     int finalZ = minPosition.getZ() + z;
@@ -53,28 +63,26 @@ public class Mine {
                 }
             }
         }
+        MineResetEvent event = new MineResetEvent(this);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        totalPercentage = 100;
     }
 
     private ArrayList<Material> generatedMaterialsList() {
         ArrayList<Material> materials = new ArrayList<>();
 
         Random random = new Random();
-        Material materialGenerated;
         nextBlock:
-        for (int i = 0; i < area; i++) {
+        for(int i = 0; i < area; i++) {
             int probabilityGenerated = random.nextInt(100);
 
-            for (Conteiner conteiner : conteiners) {
-                if (probabilityGenerated < conteiner.getPercentage()) {
-                    materialGenerated = conteiner.getMaterial();
+            for(Conteiner conteiner : conteiners) {
+                if(probabilityGenerated < conteiner.getPercentage()) {
                     materials.add(conteiner.getMaterial());
-                    AutoMines.getInstance().getLogger().info(probabilityGenerated + " " + materialGenerated);
                     continue nextBlock;
                 }
             }
-            materialGenerated = Material.AIR;
             materials.add(Material.AIR);
-            AutoMines.getInstance().getLogger().info(probabilityGenerated + " " + materialGenerated);
         }
 
         return materials;
@@ -96,37 +104,74 @@ public class Mine {
     }
 
     void calculatedDimensions() {
-        width = maxPosition.getBlockX() - minPosition.getBlockX() + 1;
-        height = maxPosition.getBlockY() - minPosition.getBlockY() + 1;
-        length = maxPosition.getBlockZ() - minPosition.getBlockZ() + 1;
+        width = maxPosition.getX() - minPosition.getX() + 1;
+        height = maxPosition.getY() - minPosition.getY() + 1;
+        length = maxPosition.getZ() - minPosition.getZ() + 1;
         area = (int) (Math.sqrt(Math.pow(Math.sqrt(Math.pow(width, 2) * Math.pow(height, 2)), 2) * Math.pow(length, 2)));
     }
 
-    String getName() {
+    public boolean containsBlock(Location location) {
+        return minPosition != null && maxPosition != null && minPosition.getX() > location.getX() && maxPosition.getX() < location.getX() &&
+                minPosition.getY() > location.getY() && maxPosition.getY() < location.getY() &&
+                minPosition.getZ() > location.getZ() && maxPosition.getZ() < location.getZ();
+    }
+
+    public List<Player> playersInsideMine() {
+        List<Player> players = new ArrayList<>();
+
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            if(minPosition.getX() < player.getLocation().getX() && maxPosition.getX() > player.getLocation().getX() &&
+                    minPosition.getY() < player.getLocation().getY() && maxPosition.getY() > player.getLocation().getY() &&
+                    minPosition.getZ() < player.getLocation().getZ() && maxPosition.getZ() > player.getLocation().getZ()) {
+                players.add(player);
+            }
+        }
+        return players;
+    }
+
+    public void updateTotalPercentage() {
+        totalPercentage = area - 1 / area;
+        if(resetPercentage <= totalPercentage)
+            reset();
+    }
+
+    public String getName() {
         return name;
     }
 
-    List<Conteiner> getContent() {
+    public World getWorld() {
+        return world;
+    }
+
+    public List<Conteiner> getContent() {
         return conteiners;
     }
 
-    ArrayList<Flags> getFlags() {
+    public List<Flags> getFlags() {
         return flags;
     }
 
-    void setMinPosition(BlockVector3 minPosition) {
+    public Location getTeleportLocation() {
+        return teleportLocation;
+    }
+
+    void setTeleportLocation(Location location) {
+        teleportLocation = location;
+    }
+
+    void setMinPosition(BlockVector3D minPosition) {
         this.minPosition = minPosition;
     }
 
-    void setMaxPosition(BlockVector3 maxPosition) {
+    void setMaxPosition(BlockVector3D maxPosition) {
         this.maxPosition = maxPosition;
     }
 
-    BlockVector3 getMinPosition() {
+    public BlockVector3D getMinPosition() {
         return minPosition;
     }
 
-    BlockVector3 getMaxPosition() {
+    public BlockVector3D getMaxPosition() {
         return maxPosition;
     }
 
@@ -138,7 +183,7 @@ public class Mine {
         return height;
     }
 
-    int getLength() {
+    public int getLength() {
         return length;
     }
 
@@ -158,12 +203,12 @@ public class Mine {
         total -= amount;
     }
 
-    int getPercentageFromBlock(Material material) {
-        for (Conteiner conteiner : conteiners) {
-            if (conteiner.getMaterial().equals(material))
-                return conteiner.getPercentage();
-        }
-        throw new IllegalStateException();
+    public void setResetPercentage(int percentage) {
+        resetPercentage = percentage;
+    }
+
+    public Object getPercentage() {
+        return resetPercentage;
     }
 
 }

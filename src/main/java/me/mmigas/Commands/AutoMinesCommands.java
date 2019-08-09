@@ -1,12 +1,13 @@
 package me.mmigas.commands;
 
-import me.mmigas.language.LanguageManager;
+import me.mmigas.commands.subcommands.*;
+import me.mmigas.files.LanguageManager;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-import static me.mmigas.AutoMines.*;
+import static me.mmigas.AutoMines.getInstance;
 
 public class AutoMinesCommands implements CommandExecutor {
 
@@ -31,6 +32,8 @@ public class AutoMinesCommands implements CommandExecutor {
             return new ResetTimer(getInstance().getMineController()).onCommand(commandSender, args);
         else if (args[0].equalsIgnoreCase("info"))
             return new Info(getInstance().getMineController()).onCommand(commandSender, args);
+        else if(args[0].equalsIgnoreCase("tp") || args[0].equalsIgnoreCase("teleport"))
+            return new SetTeleportLocation(getInstance().getMineController()).onCommand(commandSender, args);
         else
             LanguageManager.send(commandSender, LanguageManager.INVALID_COMMAND);
         return true;

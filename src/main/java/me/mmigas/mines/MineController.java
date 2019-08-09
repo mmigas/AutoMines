@@ -1,12 +1,16 @@
 package me.mmigas.mines;
 
-import com.sk89q.worldedit.math.BlockVector3;
+import me.mmigas.events.MineCreateEvent;
 import me.mmigas.events.MineResetEvent;
+import me.mmigas.math.BlockVector3D;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class MineController {
 
@@ -16,30 +20,34 @@ public class MineController {
         mines.add(new Mine(name));
     }
 
-    public void createMine(String name, World world, BlockVector3 minPosition, BlockVector3 maxPosition) {
-        mines.add(new Mine(name, world, minPosition, maxPosition));
+    public void createMine(String name, World world, BlockVector3D minPosition, BlockVector3D maxPosition) {
+        Mine mine = new Mine(name, world, minPosition, maxPosition);
+        MineCreateEvent event = new MineCreateEvent(mine);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        mines.add(mine);
+
     }
 
     public void deleteMine(Mine mine) {
         mines.remove(mine);
     }
 
-    public void setMineArea(Mine mine, BlockVector3 minPosition, BlockVector3 maxPosition) {
+    public void setMineArea(Mine mine, BlockVector3D minPosition, BlockVector3D maxPosition) {
         mine.setMinPosition(minPosition);
-        mine.setMaxPosition(minPosition);
+        mine.setMaxPosition(maxPosition);
         mine.calculatedDimensions();
     }
 
     public boolean containsBlock(Mine mine, Material material) {
-        for (int i = 0; i < mine.getContent().size(); i++) {
-            if (mine.getContent().get(i).getMaterial() == material)
+        for(int i = 0; i < mine.getContent().size(); i++) {
+            if(mine.getContent().get(i).getMaterial() == material)
                 return true;
         }
         return false;
     }
 
     public boolean addBlock(Mine mine, Material material, int percentage) {
-        if (percentage + mine.getTotal() > 100) {
+        if(percentage + mine.getTotal() > 100) {
             return false;
         }
 
@@ -50,7 +58,7 @@ public class MineController {
     }
 
     public boolean changeBlock(Mine mine, Material material, int percentage) {
-        if (percentage + mine.getTotal() > 100) {
+        if(percentage + mine.getTotal() > 100) {
             return false;
         }
 
@@ -58,19 +66,19 @@ public class MineController {
         boolean add = mine.getContent().get(materialIndex).getPercentage() < percentage;
         mine.removeTotal(mine.getContent().get(materialIndex).getPercentage());
 
-        if (materialIndex == 0) {
+        if(materialIndex == 0) {
             mine.getContent().get(materialIndex).setPercentage(percentage);
         } else {
             mine.getContent().get(materialIndex).setPercentage(mine.getContent().get(materialIndex - 1).getPercentage() + percentage);
         }
 
-        if (add) {
-            for (int i = mine.getContent().size() - 1; i > materialIndex; i--) {
+        if(add) {
+            for(int i = mine.getContent().size() - 1; i > materialIndex; i--) {
                 int newPercentage = mine.getContent().get(i).getPercentage() - percentage;
                 mine.getContent().get(i).addPercentage(newPercentage);
             }
         } else {
-            for (int i = mine.getContent().size() - 1; i > materialIndex; i--) {
+            for(int i = mine.getContent().size() - 1; i > materialIndex; i--) {
                 int newPercenteage = mine.getContent().get(i).getPercentage() - percentage;
                 mine.getContent().get(i).removePercentage(newPercenteage);
             }
@@ -85,14 +93,14 @@ public class MineController {
         int materialIndex = getContainerIdByMaterial(mine, material);
         int percentage;
 
-        if (materialIndex == 0) {
+        if(materialIndex == 0) {
             percentage = mine.getContent().get(materialIndex).getPercentage();
         } else {
             percentage = mine.getContent().get(materialIndex).getPercentage() - mine.getContent().get(materialIndex - 1).getPercentage();
         }
 
-        if (materialIndex != mine.getContent().size()) {
-            for (int i = materialIndex + 1; i < mine.getContent().size(); i++) {
+        if(materialIndex != mine.getContent().size()) {
+            for(int i = materialIndex + 1; i < mine.getContent().size(); i++) {
                 mine.getContent().get(i).removePercentage(percentage);
             }
         }
@@ -118,8 +126,8 @@ public class MineController {
     }
 
     public Mine getMine(String name) {
-        for (Mine m : mines) {
-            if (m.getName().equals(name)) {
+        for(Mine m : mines) {
+            if(m.getName().equals(name)) {
                 return m;
             }
         }
@@ -127,8 +135,8 @@ public class MineController {
     }
 
     public boolean validateMine(String name) {
-        for (Mine m : mines) {
-            if (m.getName().equals(name)) {
+        for(Mine m : mines) {
+            if(m.getName().equals(name)) {
                 return true;
             }
         }
@@ -138,7 +146,7 @@ public class MineController {
     public String getBlockList(Mine mine) {
         StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < mine.getContent().size(); i++) {
+        for(int i = 0; i < mine.getContent().size(); i++) {
             builder.append("- ").append(mine.getContent().get(i).getMaterial()).append(" ").append(mine.getContent().get(i).getPercentage()).append("\n");
         }
         return builder.toString();
@@ -159,11 +167,26 @@ public class MineController {
 
 
     private int getContainerIdByMaterial(Mine mine, Material material) {
-        for (int i = 0; i < mine.getContent().size(); i++) {
-            if (mine.getContent().get(i).getMaterial() == material) {
+        for(int i = 0; i < mine.getContent().size(); i++) {
+            if(mine.getContent().get(i).getMaterial() == material) {
                 return i;
             }
         }
         throw new IllegalStateException("Something went really wrong.");
     }
+
+    public List<Mine> getMinesList() {
+        return mines;
+    }
+
+    public void setTeleportLocation(Mine mine, Location location) {
+        mine.setTeleportLocation(location);
+        mine.getFlags().add(Flags.TeleportLocation);
+    }
+
+    public void setResetPercentage(Mine mine, int percentage) {
+        mine.setResetPercentage(percentage);
+        mine.getFlags().add(Flags.PercentageReset);
+    }
+
 }

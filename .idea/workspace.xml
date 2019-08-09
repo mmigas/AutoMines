@@ -2,56 +2,83 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6f8bb41-997f-410d-a4b9-e5c7497a2943" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/AddBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Help.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/RemoveBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/Conteiner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/OnMineReset.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Utils/Utils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/AutoMines.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/AddBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/Create.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/Delete.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/Help.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/Info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/RemoveBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/Reset.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/ResetTimer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/SetArea.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/subcommands/SetTeleportLocation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/events/MineCreateEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/events/MineResetEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/files/LanguageManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/files/MineStorage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/listeners/BlockBreakListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/listeners/MineCreateListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/listeners/MineResetListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/math/BlockVector2D.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/math/BlockVector3D.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/AutoMines.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/AutoMines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/AddBlock.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/AutoMinesCommands.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/AutoMinesCommands.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/ChangeBlock.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Create.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Create.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Delete.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Delete.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Reset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Reset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/ResetTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/ResetTimer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/SetArea.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/SetArea.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Language/LanguageFiles.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Language/LanguageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Language/LanguageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/Mine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/Mine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/MineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/MineController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Utils/Loader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Storage/Loader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Utils/Save.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/Storage/Save.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/en_ENG.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Create.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Delete.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Help.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Info.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/RemoveBlock.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Reset.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/ResetTimer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/SetArea.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/language/LanguageManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/mines/Conteiner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/mines/Conteiner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/mines/Flags.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/mines/Flags.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/mines/Mine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/mines/Mine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/mines/MineController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/mines/MineController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/storage/Loader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/storage/Save.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/me/mmigas/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/mmigas/utils/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/en_ENG.yml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/AutoMines.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/AutoMines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/AddBlock.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/AutoMinesCommands.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/AutoMinesCommands.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/ChangeBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Create.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Create.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Delete.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Delete.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Info.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Reset.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Reset.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/ResetTimer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/ResetTimer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/SetArea.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/SetArea.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Language/LanguageFiles.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Create.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Delete.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Help.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Info.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/RemoveBlock.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/Reset.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/ResetTimer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Commands/SetArea.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Language/LanguageManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Language/LanguageManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/Conteiner.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/Conteiner.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/Flags.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/Flags.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/Mine$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/Mine$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/Mine.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/Mine.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/MineController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Mines/MineController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Utils/Loader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Utils/Save.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Storage/Loader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Storage/Save.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/me/mmigas/Utils/Utils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/me/mmigas/Utils/Utils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" />
     </list>
-    <ignored path="$PROJECT_DIR$/out/" />
-    <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -70,94 +97,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/Conteiner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/MineController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="106" column="51" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/AutoMines.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/Mine.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2044">
-              <caret line="160" column="8" selection-start-line="160" selection-start-column="8" selection-end-line="160" selection-end-column="8" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/events/MineResetEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/listeners/OnMineResetListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="12" selection-start-line="12" selection-end-line="12" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/listeners/BlockBreakListener.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -167,72 +106,8 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>iterator</find>
-      <find>perce</find>
-      <find>mi</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/Mines/Coordinates.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Commands/Reset.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Mines/MineController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Commands/Create.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Commands/SetArea.java" />
-        <option value="$PROJECT_DIR$/src/main/java/AutoMines.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Mines/AutoMines.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Mines/Mine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/ResetTask.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/AutoMines.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/AutoMinesCommand.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Command.java" />
-        <option value="$PROJECT_DIR$/target/classes/plugin.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/Flags.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Language/LanguageFiles.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/AutoMines.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Help.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Storage/Save.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/plugin.yml" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Exception/MineNotFoundExecption.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Exception/MineNotFoundException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Create.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/ChangeBlock.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Utils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Utils/Pain.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Utils/Pair.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/AutoMinesCommands.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Language/LanguageManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Utils/Utils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/Conteiner.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/Mine.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Info.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Info.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/AddBlock.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Delete.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/SetArea.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/ResetTimer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/Reset.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Commands/RemoveBlock.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/MineController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/Mines/OnMineReset.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/mines/OnMineReset.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/events/BlockBreakEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/events/BlockBreakListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/listeners/OnMineResetEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/mines/events.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/mines/MineController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/events/MineResetEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/listeners/OnMineResetListener.java" />
-        <option value="$PROJECT_DIR$/src/main/java/me/mmigas/listeners/BlockBreakListener.java" />
-      </list>
-    </option>
   </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
@@ -241,122 +116,15 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="MavenProjectNavigator">
-    <treeState>
-      <expand>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="Mines" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-        </path>
-        <path>
-          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
-          <item name="Mines" type="9519ce18:MavenProjectsStructure$ProjectNode" />
-          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
-        </path>
-      </expand>
-      <select />
-    </treeState>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-98" />
-    <option name="y" value="-17" />
-    <option name="width" value="1936" />
-    <option name="height" value="788" />
-  </component>
+  <component name="ProjectId" id="1P9IPiD5NaayAAZCIrtfKrRWSGg" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="AutoMines" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoMines" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoMines" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoMines" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoMines" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoMines" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoMines" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoMines" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoMines" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoMines" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="mmigas" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoMines" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoMines" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="mmigas" type="462c0819:PsiDirectoryNode" />
-              <item name="listeners" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoMines" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoMines" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="mmigas" type="462c0819:PsiDirectoryNode" />
-              <item name="mines" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="AutoMines" type="b2602c69:ProjectViewProjectNode" />
-              <item name="AutoMines" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Mines" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Mines" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="Mines" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Mines" type="616d4139:PackageViewModuleNode" />
-              <item name="Commands" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563204187910" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Clandestinos" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -369,7 +137,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -422,86 +190,47 @@
       <workItem from="1564767832583" duration="13337000" />
       <workItem from="1564938561463" duration="1315000" />
       <workItem from="1564948603598" duration="122000" />
-      <workItem from="1564951622323" duration="9102000" />
+      <workItem from="1564951622323" duration="11561000" />
+      <workItem from="1565012244180" duration="3355000" />
+      <workItem from="1565031589681" duration="884000" />
+      <workItem from="1565224526564" duration="6884000" />
+      <workItem from="1565279167179" duration="138000" />
+      <workItem from="1565279875826" duration="1575000" />
+      <workItem from="1565292750011" duration="5782000" />
+      <workItem from="1565310241501" duration="7303000" />
     </task>
     <servers />
   </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="83738000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49918166" visible="true" weight="0.23146747" />
-      <window_info id="Structure" order="1" sideWeight="0.5008183" side_tool="true" weight="0.2246596" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3289689" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.3289689" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.24962178" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" weight="0.32980332" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Database" order="8" weight="0.32980332" />
-    </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22768533" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Image Layers" order="2" />
-      <window_info id="Designer" order="3" />
-      <window_info id="UI Designer" order="4" />
-      <window_info id="Capture Tool" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3289689" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3289689" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.3289689" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.24962178" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Theme Preview" order="4" />
-      <window_info anchor="right" id="Maven" order="5" weight="0.32980332" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Database" order="8" weight="0.32980332" />
-    </layout-to-restore>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar!/org/jetbrains/annotations/Contract.class</url>
-          <properties />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
@@ -510,400 +239,6 @@
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sk89q/worldedit/worldedit-core/7.0.1-SNAPSHOT/worldedit-core-7.0.1-20190715.212052-44.jar!/com/sk89q/worldedit/regions/Region.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sk89q/worldedit/worldedit-core/7.0.1-SNAPSHOT/worldedit-core-7.0.1-20190715.212052-44.jar!/com/sk89q/worldedit/regions/TransformRegion.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="20" column="22" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sk89q/worldedit/worldedit-core/7.0.1-SNAPSHOT/worldedit-core-7.0.1-20190715.212052-44.jar!/com/sk89q/worldedit/regions/AbstractRegion.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="65" column="16" lean-forward="true" selection-start-line="65" selection-start-column="16" selection-end-line="65" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.3-SNAPSHOT/spigot-api-1.14.3-20190624.205738-1.jar!/org/bukkit/entity/HumanEntity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="848">
-          <caret line="70" column="14" selection-start-line="70" selection-start-column="14" selection-end-line="70" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/storage/Save.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/storage/Loader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="19" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/plugin.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.3-SNAPSHOT/spigot-api-1.14.3-20190624.205738-1-sources.jar!/org/bukkit/inventory/PlayerInventory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="145" column="12" selection-start-line="145" selection-start-column="5" selection-end-line="145" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.3-SNAPSHOT/spigot-api-1.14.3-20190624.205738-1-sources.jar!/org/bukkit/entity/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1328">
-          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/Exception/MineNotFoundException.java" />
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sk89q/worldedit/worldedit-core/7.0.1-SNAPSHOT/worldedit-core-7.0.1-20190715.212052-44.jar!/com/sk89q/worldedit/regions/CuboidRegion.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="20" column="11" selection-start-line="20" selection-start-column="11" selection-end-line="20" selection-end-column="11" />
-          <folding>
-            <element signature="e#636#637#0" expanded="true" />
-            <element signature="e#681#682#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/sk89q/worldedit/worldedit-bukkit/7.0.1-SNAPSHOT/worldedit-bukkit-7.0.1-20190715.212052-44.jar!/com/sk89q/worldedit/bukkit/WorldEditPlugin.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="77" column="13" selection-start-line="77" selection-start-column="13" selection-end-line="77" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/17.0.0/annotations-17.0.0.jar!/org/jetbrains/annotations/Contract.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#576#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/jetbrains/annotations/17.0.0/annotations-17.0.0-sources.jar!/org/jetbrains/annotations/Contract.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1003" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/Language/LanguageFiles.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/Flags.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="7" column="12" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/util/AbstractMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="67" column="51" lean-forward="true" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/util/TreeMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="112" column="19" selection-start-line="112" selection-start-column="19" selection-end-line="112" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/util/NavigableMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="94" column="49" selection-start-line="94" selection-start-column="49" selection-end-line="94" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/util/SortedMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="112" column="42" lean-forward="true" selection-start-line="112" selection-start-column="42" selection-end-line="112" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/util/Map.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3117">
-          <caret line="128" column="17" selection-start-line="128" selection-start-column="17" selection-end-line="128" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/Utils/Pain.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/Utils/Pair.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/language/LanguageManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="90" column="121" selection-start-line="90" selection-start-column="121" selection-end-line="90" selection-end-column="121" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/lang/Comparable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-205">
-          <caret line="95" column="17" selection-start-line="95" selection-start-column="17" selection-end-line="95" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/util/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="139" column="57" selection-start-line="139" selection-start-column="57" selection-end-line="139" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/util/Random.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="327" column="15" selection-start-line="327" selection-start-column="15" selection-end-line="327" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/lang/Double.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_212/src.zip!/java/lang/IllegalStateException.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="42" column="11" selection-start-line="42" selection-start-column="11" selection-end-line="42" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/utils/Utils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/AutoMinesCommands.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="27" column="49" selection-start-line="27" selection-start-column="49" selection-end-line="27" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/SetArea.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="41" column="52" selection-start-line="41" selection-start-column="52" selection-end-line="41" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/ResetTimer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/Reset.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="371">
-          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/RemoveBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-61">
-          <caret line="18" column="67" lean-forward="true" selection-start-line="18" selection-start-column="67" selection-end-line="18" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/AddBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="33" selection-start-line="33" selection-end-line="38" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/Help.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/Delete.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="32" column="52" selection-start-line="32" selection-start-column="52" selection-end-line="32" selection-end-column="52" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/Create.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="42" column="9" selection-start-line="42" selection-start-column="9" selection-end-line="42" selection-end-column="9" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/commands/Info.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/Conteiner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.3-SNAPSHOT/spigot-api-1.14.3-20190624.205738-1-sources.jar!/org/bukkit/event/Listener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.14.3-SNAPSHOT/spigot-api-1.14.3-20190624.205738-1-sources.jar!/org/bukkit/event/block/BlockBreakEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/events.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="32">
-          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/OnMineReset.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/Mine.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2044">
-          <caret line="160" column="8" selection-start-line="160" selection-start-column="8" selection-end-line="160" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/mines/MineController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="106" column="51" selection-start-line="106" selection-start-column="51" selection-end-line="106" selection-end-column="51" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/AutoMines.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/events/MineResetEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/listeners/OnMineResetListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/me/mmigas/listeners/BlockBreakListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="14" column="13" lean-forward="true" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>

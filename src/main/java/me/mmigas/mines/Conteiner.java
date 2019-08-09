@@ -2,12 +2,12 @@ package me.mmigas.mines;
 
 import org.bukkit.Material;
 
-class Conteiner implements Comparable<Conteiner> {
+public class Conteiner implements Comparable<Conteiner> {
 
     private Material material;
     private int percentage;
 
-    Conteiner(Material material, int percentage) {
+    public Conteiner(Material material, int percentage) {
         this.material = material;
         this.percentage = percentage;
     }
@@ -17,7 +17,7 @@ class Conteiner implements Comparable<Conteiner> {
         return Integer.compare(percentage, other.percentage);
     }
 
-    Material getMaterial() {
+    public Material getMaterial() {
         return material;
     }
 
@@ -33,7 +33,7 @@ class Conteiner implements Comparable<Conteiner> {
         percentage -= amount;
     }
 
-    int getPercentage() {
+    public int getPercentage() {
         return percentage;
     }
 

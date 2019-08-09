@@ -4,6 +4,8 @@ public enum Flags {
 
 	TimeReset,
 	PercentageReset,
-	TeleportPlace,
-	Effects;
+	TeleportLocation,
+	Active,
+    Effects;
+
 }

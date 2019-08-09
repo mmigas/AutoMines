@@ -1,13 +1,17 @@
 package me.mmigas.utils;
 
 
-import me.mmigas.language.LanguageManager;
+import me.mmigas.files.LanguageManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class Utils {
+public final class Utils {
+
+    private Utils(){
+
+    }
 
     public static Material getSolidBlockInPlayersHand(Player player) {
         ItemStack itemHolding = player.getInventory().getItemInMainHand();

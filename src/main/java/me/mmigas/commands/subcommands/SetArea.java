@@ -25,18 +25,18 @@ public class SetArea {
 
     public boolean onCommand(CommandSender commandSender, String[] args) {
         if (!(commandSender instanceof Player)) {
-            LanguageManager.send(commandSender, LanguageManager.MUST_BE_A_PLAYER);
+            LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
             return false;
         }
 
         Player player = (Player) commandSender;
 
         if (args.length != 2) {
-            LanguageManager.send(commandSender, LanguageManager.WRONG_RESET_TIMER_USAGE);
+            LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_RESET_TIMER_USAGE);
         }
 
         if (!mineController.validateMine(args[1])) {
-            LanguageManager.send(commandSender, LanguageManager.MINE_NOT_FOUND);
+            LanguageManager.sendKey(commandSender, LanguageManager.MINE_NOT_FOUND);
             return true;
         }
 

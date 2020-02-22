@@ -21,11 +21,11 @@ public class Conteiner implements Comparable<Conteiner> {
         return material;
     }
 
-    void setPercentage(int amount){
+    void setPercentage(int amount) {
         percentage = amount;
     }
 
-    void addPercentage(int  amount) {
+    void addPercentage(int amount) {
         percentage += amount;
     }
 

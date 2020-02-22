@@ -1,12 +1,13 @@
 package me.mmigas.mines;
 
+import me.mmigas.AutoMines;
 import me.mmigas.events.MineCreateEvent;
-import me.mmigas.events.MineResetEvent;
 import me.mmigas.math.BlockVector3D;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +17,18 @@ public class MineController {
 
     private List<Mine> mines = new ArrayList<>();
 
+    private List<Mine> resetQueue = new ArrayList<>();
+    //Mutex lock = new Mutex();
+
+    /**
+     * Start the resetTimerVerification task
+     */
+    public MineController() {
+        resetVerificationController();
+    }
+
     public void createMine(String name) {
+        Mine mine = new Mine(name);
         mines.add(new Mine(name));
     }
 
@@ -25,7 +37,6 @@ public class MineController {
         MineCreateEvent event = new MineCreateEvent(mine);
         Bukkit.getServer().getPluginManager().callEvent(event);
         mines.add(mine);
-
     }
 
     public void deleteMine(Mine mine) {
@@ -109,20 +120,116 @@ public class MineController {
         mine.getContent().remove(materialIndex);
     }
 
-    public void resetMine(Mine mine) {
-        mine.reset();
-        MineResetEvent event = new MineResetEvent(mine);
-        Bukkit.getPluginManager().callEvent(event);
+    /**
+     * Used to calculate the mined percentage
+     * The calculations are done when one block as been mined from the mine
+     * then removes 1 to the area integer and divides by its dimentions
+     * if the mined percentage is lower then the reset percentage the mine resets
+     */
+    public void updateMinedPercentage(Mine mine) {
+        mine.setMinedPercentage((mine.getArea() - 1) / mine.getArea());
+        if(mine.getResetPercentage() <= mine.getMinedPercentage())
+            mineResetRequest(mine);
     }
 
-    public void startResetTimer(Mine mine, int time) {
+    private int getContainerIdByMaterial(Mine mine, Material material) {
+        for(int i = 0; i < mine.getContent().size(); i++) {
+            if(mine.getContent().get(i).getMaterial() == material) {
+                return i;
+            }
+        }
+        throw new IllegalStateException("Something went really wrong.");
+    }
+
+    public void setTeleportLocation(Mine mine, Location location) {
+        mine.setTeleportLocation(location);
+        mine.getFlags().add(Flags.TeleportLocation);
+    }
+
+    public void setResetPercentage(Mine mine, int percentage) {
+        mine.setResetPercentage(percentage);
+        if(!mine.getFlags().contains(Flags.PercentageReset)) {
+            mine.getFlags().add(Flags.PercentageReset);
+        }
+    }
+
+    public void mineResetRequest(Mine mine) {
+        //lock.lock();
+        resetQueue.add(mine);
+        //lock.unlock();
+        if(resetQueue.size() <= 1) {
+            resetController();
+        }
+    }
+
+    private void resetController() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                //lock.lock();
+                for(Mine mine : resetQueue) {
+                    mine.reset();
+                }
+                //lock.unlock();
+            }
+        }.runTaskTimer(AutoMines.getInstance(), 10, 20);
+    }
+
+
+    /**
+     * Controller task that verifies which mine needs to reset in that tick
+     */
+    private void resetVerificationController() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for(Mine mine : mines) {
+                    if(mine.getFlags().contains(Flags.TimeReset) && mine.getResetTime() < System.currentTimeMillis()) {
+                        mineResetRequest(mine);
+                    }
+                }
+            }
+        }.runTaskTimer(AutoMines.getInstance(), 0, 20);
+    }
+
+    /**
+     * Sets up the mine's reset cooldown
+     * @param mine thats getting updated
+     * @param cooldown new cooldown
+     * @return false if the cooldown is lower than 1 second
+     */
+    public boolean setResetTimer(Mine mine, long cooldown) {
+        if(cooldown <= 1) {
+            return false;
+        }
+
+        mine.setResetCooldown(cooldown);
+
+        if(!mine.getFlags().contains(Flags.TimeReset)) {
+            mine.getFlags().add(Flags.TimeReset);
+        }
+        return true;
+    }
+
+    public boolean startMineResetTimer(Mine mine) {
+        if(mine.getFlags().contains(Flags.TimeReset)) {
+            return false;
+        }
         mine.getFlags().add(Flags.TimeReset);
-        mine.startTimerCooldown(time);
+        mine.updateResetTime();
+        return true;
     }
 
-    public void stopResetTimer(Mine mine) {
+    public boolean stopMineResetTimer(Mine mine) {
+        if(!mine.getFlags().contains(Flags.TimeReset)) {
+            return false;
+        }
         mine.getFlags().remove(Flags.TimeReset);
-        mine.stopTimerCooldown();
+        return true;
+    }
+
+    public List<Mine> getMinesList() {
+        return mines;
     }
 
     public Mine getMine(String name) {
@@ -141,52 +248,6 @@ public class MineController {
             }
         }
         return false;
-    }
-
-    public String getBlockList(Mine mine) {
-        StringBuilder builder = new StringBuilder();
-
-        for(int i = 0; i < mine.getContent().size(); i++) {
-            builder.append("- ").append(mine.getContent().get(i).getMaterial()).append(" ").append(mine.getContent().get(i).getPercentage()).append("\n");
-        }
-        return builder.toString();
-    }
-
-    public String getDimensions(Mine mine) {
-        StringBuilder builder = new StringBuilder();
-
-        builder.append("MinPosition: ").append(mine.getMinPosition()).append("\n")
-                .append("MaxPosition: ").append(mine.getMaxPosition()).append("\n")
-                .append("Width: ").append(mine.getWidth()).append("\n")
-                .append("Height: ").append(mine.getHeight()).append("\n")
-                .append("Length: ").append(mine.getLength()).append("\n")
-                .append("Area: ").append(mine.getArea()).append("\n");
-
-        return builder.toString();
-    }
-
-
-    private int getContainerIdByMaterial(Mine mine, Material material) {
-        for(int i = 0; i < mine.getContent().size(); i++) {
-            if(mine.getContent().get(i).getMaterial() == material) {
-                return i;
-            }
-        }
-        throw new IllegalStateException("Something went really wrong.");
-    }
-
-    public List<Mine> getMinesList() {
-        return mines;
-    }
-
-    public void setTeleportLocation(Mine mine, Location location) {
-        mine.setTeleportLocation(location);
-        mine.getFlags().add(Flags.TeleportLocation);
-    }
-
-    public void setResetPercentage(Mine mine, int percentage) {
-        mine.setResetPercentage(percentage);
-        mine.getFlags().add(Flags.PercentageReset);
     }
 
 }

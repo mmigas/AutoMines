@@ -3,6 +3,7 @@ name: AutoMines
 description: A simple mine plugin
 api-version: 1.14
 version: 0.1
+depend: [WorldEdit]
 commands:
   AutoMines:
     description: AutoMines Base plugin

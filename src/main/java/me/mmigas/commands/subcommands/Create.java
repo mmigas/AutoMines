@@ -4,37 +4,40 @@ import com.sk89q.worldedit.IncompleteRegionException;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.Region;
+import me.mmigas.commands.CMD;
 import me.mmigas.files.LanguageManager;
 import me.mmigas.math.BlockVector3D;
 import me.mmigas.mines.MineController;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class Create {
+public class Create extends CMD {
 
     private final WorldEditPlugin worldEditPlugin;
     private final MineController mineController;
 
     public Create(WorldEditPlugin worldEditPlugin, MineController mineController) {
+        super(mineController);
         this.worldEditPlugin = worldEditPlugin;
         this.mineController = mineController;
     }
 
+    @Override
     public boolean onCommand(CommandSender commandSender, String[] args) {
         if(!(commandSender instanceof Player)) {
-            LanguageManager.send(commandSender, LanguageManager.MUST_BE_A_PLAYER);
+            LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
             return false;
         }
 
         Player player = (Player) commandSender;
 
         if(args.length != 2) {
-            LanguageManager.send(commandSender, LanguageManager.WRONG_CREATE_USAGE);
+            LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_CREATE_USAGE);
             return true;
         }
 
         if(mineController.validateMine(args[1])) {
-            LanguageManager.send(commandSender, LanguageManager.MINE_ALREADY_EXISTS);
+            LanguageManager.sendKey(commandSender, LanguageManager.MINE_ALREADY_EXISTS);
             return true;
         }
 
@@ -56,6 +59,11 @@ public class Create {
         player.sendMessage("Created " + args[1]);
 
         return true;
+    }
+
+    @Override
+    public String getLabel() {
+        return "create";
     }
 
 

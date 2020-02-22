@@ -4,6 +4,7 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import me.mmigas.commands.AutoMinesCommands;
 import me.mmigas.files.LanguageManager;
 import me.mmigas.listeners.BlockBreakListener;
+import me.mmigas.listeners.InventoryListener;
 import me.mmigas.listeners.MineCreateListener;
 import me.mmigas.listeners.MineResetListener;
 import me.mmigas.mines.MineController;
@@ -22,11 +23,13 @@ public class AutoMines extends JavaPlugin {
 
 	@Override
 	public void onEnable(){
-		//load into memory all the mines
 		instance = this;
 		worldEditPlugin = (WorldEditPlugin) Bukkit.getPluginManager().getPlugin("WorldEdit");
-        mineController = new MineController();
-        LanguageManager languageManager = new LanguageManager(this);
+        if(worldEditPlugin == null){
+            getServer().getPluginManager().disablePlugin(this);
+        }
+		mineController = new MineController();
+        new LanguageManager(this);
         mineStorage = new MineStorage(this);
 		registerCommands();
         registerListener();
@@ -39,11 +42,11 @@ public class AutoMines extends JavaPlugin {
         mineStorage.saveAllMines();
 	}
 
-
     private void registerListener(){
         getServer().getPluginManager().registerEvents(new BlockBreakListener(), this);
         getServer().getPluginManager().registerEvents(new MineResetListener(), this);
         getServer().getPluginManager().registerEvents(new MineCreateListener(), this);
+        getServer().getPluginManager().registerEvents(new InventoryListener(), this);
     }
 
 	private void registerCommands(){
@@ -57,7 +60,6 @@ public class AutoMines extends JavaPlugin {
 	public MineController getMineController(){
 		return mineController;
 	}
-
 
 	public WorldEditPlugin getWorldEditPlugin(){
 		return worldEditPlugin;

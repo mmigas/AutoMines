@@ -17,33 +17,33 @@ public class RemoveBlock {
     }
 
     public boolean onCommand(CommandSender commandSender, String[] args) {
-        if (!(commandSender instanceof Player)) {
-            LanguageManager.send(commandSender, LanguageManager.MUST_BE_A_PLAYER);
+        if(!(commandSender instanceof Player)) {
+            LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
             return true;
         }
 
         Player player = (Player) commandSender;
 
-        if (args.length != 2) {
-            LanguageManager.send(commandSender, LanguageManager.WRONG_CHANGE_BLOCK_USAGE);
+        if(args.length != 2) {
+            LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_CHANGE_BLOCK_USAGE);
             return false;
         }
 
-        if (!mineController.validateMine(args[1])) {
-            LanguageManager.send(commandSender, LanguageManager.MINE_NOT_FOUND);
+        if(!mineController.validateMine(args[1])) {
+            LanguageManager.sendKey(commandSender, LanguageManager.MINE_NOT_FOUND);
             return true;
         }
 
         Mine mine = mineController.getMine(args[1]);
 
         Material blockHolding = Utils.getSolidBlockInPlayersHand(player);
-        if (blockHolding == null)
+        if(blockHolding == null)
             return true;
-        if (mineController.containsBlock(mine, blockHolding)) {
+        if(mineController.containsBlock(mine, blockHolding)) {
             mineController.removeBlock(mine, blockHolding);
-            LanguageManager.send(player, LanguageManager.BLOCK_REMOVED);
+            LanguageManager.sendKey(player, LanguageManager.BLOCK_REMOVED, mine, blockHolding, mine.getMinedPercentage());
         } else {
-            LanguageManager.send(player, LanguageManager.MINE_DONT_HAVE_BLOCK);
+            LanguageManager.sendKey(player, LanguageManager.MINE_DONT_HAVE_BLOCK, mine);
         }
 
         return true;

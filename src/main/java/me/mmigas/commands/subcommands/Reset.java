@@ -5,27 +5,28 @@ import me.mmigas.mines.Mine;
 import me.mmigas.mines.MineController;
 import org.bukkit.command.CommandSender;
 
-public class ResetTimer {
+public class Reset {
 
-    private MineController mineController;
+    private final MineController mineController;
 
-    public ResetTimer(MineController mineController) {
+    public  Reset(MineController mineController) {
         this.mineController = mineController;
     }
 
     public boolean onCommand(CommandSender commandSender, String[] args) {
         if (args.length != 2) {
-            LanguageManager.send(commandSender, LanguageManager.WRONG_RESET_TIMER_USAGE);
-            return false;
+            LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_RESET_USAGE);
         }
 
         if (!mineController.validateMine(args[1])) {
-            LanguageManager.send(commandSender, LanguageManager.MINE_NOT_FOUND);
+            LanguageManager.sendKey(commandSender, LanguageManager.MINE_NOT_FOUND);
             return true;
         }
 
         Mine mine = mineController.getMine(args[1]);
 
+        mineController.mineResetRequest(mine);
+        LanguageManager.sendKey(commandSender, LanguageManager.MINE_RESET);
         return true;
     }
 }

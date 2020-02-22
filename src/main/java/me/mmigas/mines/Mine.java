@@ -23,20 +23,25 @@ public class Mine {
     private List<Conteiner> conteiners = new ArrayList<>();
     private int total = 0;
 
-    private ArrayList<Flags> flags = new ArrayList<>();
+    private List<Flags> flags = new ArrayList<>();
 
     private int length = 0;
     private int width = 0;
     private int height = 0;
     private int area = 0;
 
-    private int totalPercentage;
+    private int minedPercentage;
     private int resetPercentage;
+    private long resetCooldown;
+    private int resetEffectCooldown;
+    private boolean isReseting = false;
+    private long resetTime;
 
+    Random random = new Random();
 
     public Mine(String name) {
         this.name = name;
-        totalPercentage = 100;
+        minedPercentage = 0;
     }
 
     public Mine(String name, World world, BlockVector3D minPosition, BlockVector3D maxPosition) {
@@ -44,34 +49,84 @@ public class Mine {
         this.minPosition = minPosition;
         this.maxPosition = maxPosition;
         this.world = world;
-        totalPercentage = 100;
+        minedPercentage = 0;
         calculatedDimensions();
     }
 
+    /**
+     * Processes the reset request by the minecontroller
+     */
     void reset() {
-        ArrayList<Material> materialsGenerated = generatedMaterialsList();
-        int counter = 0;
+        isReseting = true;
+        List<Material> materialsGenerated = generateMaterialsList();
+
+        if(resetEffectCooldown == 0) {
+            normalReset(materialsGenerated);
+        } else {
+            resetWithEffect(materialsGenerated);
+        }
+
+        MineResetEvent event = new MineResetEvent(this);
+        Bukkit.getServer().getPluginManager().callEvent(event);
+        minedPercentage = 0;
+        isReseting = false;
+    }
+
+    /**
+     * Normal reset without any effect
+     * @param materials
+     */
+    private void normalReset(List<Material> materials) {
         for(int z = 0; z < length; z++) {
             for(int y = 0; y < height; y++) {
                 for(int x = 0; x < width; x++) {
-                    int finalX = minPosition.getX() + x;
-                    int finalY = minPosition.getY() + y;
-                    int finalZ = minPosition.getZ() + z;
-
-                    world.getBlockAt(new Location(world, (double) finalX, (double) finalY, (double) finalZ)).setType(materialsGenerated.get(counter));
-                    counter++;
+                    world.getBlockAt(getMinPosition().getX() + x, getMinPosition().getY() + y, getMinPosition().getZ() + z).setType(materials.iterator().next());
                 }
             }
         }
-        MineResetEvent event = new MineResetEvent(this);
-        Bukkit.getServer().getPluginManager().callEvent(event);
-        totalPercentage = 100;
     }
 
-    private ArrayList<Material> generatedMaterialsList() {
-        ArrayList<Material> materials = new ArrayList<>();
+    /**
+     * Resets mine with the per block cooldown effect
+     * @param materials
+     */
+    private void resetWithEffect(List<Material> materials) {
+        new BukkitRunnable() {
+            int x, y, z;
 
-        Random random = new Random();
+            @Override
+            public void run() {
+                if(x >= width) {
+                    z++;
+                    x = 0;
+                }
+                if(z >= length) {
+                    y++;
+                    z = 0;
+                }
+                if(y >= height) {
+                    this.cancel();
+                } else {
+                    world.getBlockAt(getMinPosition().getX() + x, getMinPosition().getY() + y, getMinPosition().getZ() + z).setType(materials.iterator().next());
+                    x++;
+                }
+
+            }
+
+        }.runTaskTimer(AutoMines.getInstance(), 0, resetEffectCooldown);
+    }
+
+    public void updateResetTime(){
+        setResetTime(System.currentTimeMillis() + resetCooldown);
+    }
+
+    /**
+     * Genererates the materials list for the new reset
+     * @return ArrayList with all the blocks
+     */
+    private List<Material> generateMaterialsList() {
+        List<Material> materials = new ArrayList<>();
+
         nextBlock:
         for(int i = 0; i < area; i++) {
             int probabilityGenerated = random.nextInt(100);
@@ -88,34 +143,32 @@ public class Mine {
         return materials;
     }
 
-    private BukkitRunnable resetTask;
-
-    void startTimerCooldown(int periodInSec) {
-        resetTask = (BukkitRunnable) new BukkitRunnable() {
-            @Override
-            public void run() {
-                reset();
-            }
-        }.runTaskTimerAsynchronously(AutoMines.getInstance(), 0, periodInSec);
-    }
-
-    void stopTimerCooldown() {
-        Bukkit.getScheduler().cancelTask(resetTask.getTaskId());
-    }
-
+    /**
+     * Calculates the dimensions of the new Area
+     */
     void calculatedDimensions() {
         width = maxPosition.getX() - minPosition.getX() + 1;
         height = maxPosition.getY() - minPosition.getY() + 1;
         length = maxPosition.getZ() - minPosition.getZ() + 1;
-        area = (int) (Math.sqrt(Math.pow(Math.sqrt(Math.pow(width, 2) * Math.pow(height, 2)), 2) * Math.pow(length, 2)));
+        area = width * height * length;
     }
 
+    /**
+     * checks if the location is insidade this mine
+     *
+     * @param location to be checkd
+     * @return true if is inside the mine false otherwise
+     */
     public boolean containsBlock(Location location) {
         return minPosition != null && maxPosition != null && minPosition.getX() > location.getX() && maxPosition.getX() < location.getX() &&
                 minPosition.getY() > location.getY() && maxPosition.getY() < location.getY() &&
                 minPosition.getZ() > location.getZ() && maxPosition.getZ() < location.getZ();
     }
 
+    /**
+     * Gets all the players currently inside the mine
+     * @return ArrayList with all the players
+     */
     public List<Player> playersInsideMine() {
         List<Player> players = new ArrayList<>();
 
@@ -129,10 +182,33 @@ public class Mine {
         return players;
     }
 
-    public void updateTotalPercentage() {
-        totalPercentage = area - 1 / area;
-        if(resetPercentage <= totalPercentage)
-            reset();
+
+    /**
+     * For info command
+     *
+     * @return String with information
+     */
+    public String getDimensions() {
+        return "MinPosition: " + getMinPosition() + "\n" +
+                "MaxPosition: " + getMaxPosition() + "\n" +
+                "Width: " + getWidth() + "\n" +
+                "Height: " + getHeight() + "\n" +
+                "Length: " + getLength() + "\n" +
+                "Area: " + getArea() + "\n";
+    }
+
+    /**
+     * For info command
+     *
+     * @return String with information
+     */
+    public String getBlockList() {
+        StringBuilder builder = new StringBuilder();
+
+        for(int i = 0; i < getContent().size(); i++) {
+            builder.append("- ").append(getContent().get(i).getMaterial()).append(" ").append(getContent().get(i).getPercentage()).append("\n");
+        }
+        return builder.toString();
     }
 
     public String getName() {
@@ -207,9 +283,44 @@ public class Mine {
         resetPercentage = percentage;
     }
 
-    public Object getPercentage() {
+    public long getResetCooldown() {
+        return resetCooldown;
+    }
+
+    public void setResetCooldown(long cooldown) {
+        resetCooldown = cooldown;
+    }
+
+    public int getResetPercentage() {
         return resetPercentage;
     }
 
+    public void setMinedPercentage(int minedPercentage) {
+        this.minedPercentage = minedPercentage;
+    }
+
+    public int getMinedPercentage() {
+        return minedPercentage;
+    }
+
+    public void setResetEffectCooldown(int cooldown) {
+        this.resetEffectCooldown = cooldown;
+    }
+
+    public int getResetEffectCooldown() {
+        return resetEffectCooldown;
+    }
+
+    public boolean isReseting() {
+        return isReseting;
+    }
+
+    public long getResetTime(){
+        return resetTime;
+    }
+
+    public void setResetTime(long resetTime){
+        this.resetTime = resetTime;
+    }
 }
 

@@ -52,7 +52,6 @@ public class MineStorage {
     public MineStorage(AutoMines plugin) {
         this.plugin = plugin;
         this.directory = new File(plugin.getDataFolder(), "Mines");
-
     }
 
     public void loadAllMines() {
@@ -87,7 +86,6 @@ public class MineStorage {
                     minPosition = new BlockVector3D(minX, minY, minZ);
                     maxPosition = new BlockVector3D(maxX, maxY, maxZ);
 
-
                     mine = new Mine(name, mineWorld, minPosition, maxPosition);
                 } else {
                     mine = new Mine(name);
@@ -98,7 +96,6 @@ public class MineStorage {
                         mine.getContent().add(new Conteiner(Material.getMaterial(string), fileConfiguration.getInt(CONTENT + "." + string)));
                     }
                 }
-
 
                 if(fileConfiguration.contains(TELEPORT)) {
                     World tpWorld = Bukkit.getWorld(Objects.requireNonNull(fileConfiguration.getString(TELEPORT_WORLD)));
@@ -175,7 +172,7 @@ public class MineStorage {
         }
 
         if(mine.getFlags().contains(Flags.PercentageReset)) {
-            fileConfiguration.addDefault(PERCENTAGE, mine.getPercentage());
+            fileConfiguration.addDefault(PERCENTAGE, mine.getResetPercentage());
         }
 
         if(mine.getFlags().contains(Flags.TimeReset)) {

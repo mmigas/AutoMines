@@ -1,11 +1,13 @@
 package me.mmigas.files;
 
 import me.mmigas.AutoMines;
+import me.mmigas.mines.Mine;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
 import java.io.IOException;
@@ -42,9 +44,14 @@ public class LanguageManager {
     public static final String BLOCK_REMOVED = "block-removed";
     public static final String MINE_DONT_HAVE_BLOCK = "mine-dont-have-block";
     public static final String PERCENTAGE_GREATER_THAN_100 = "percentage-grater-than-100";
+    public static final String INVALID_RESET_COOLDOWN = "invalid-reset-cooldown";
 
     public static final String MUST_BE_A_PLAYER = "&cYou must be a player to executar that command!";
     public static final String INVALID_COMMAND = "&cInvalid Command!";
+
+    private static final String MINE_PLACEHOLDER = "%mine%";
+    private static final String BLOCK_PLACEHOLDER = "%block%";
+    private static final String MINED_PERCENTAGE_PLACEHOLDER = "%mined%";
 
     private static final String FILE = "language.yml";
 
@@ -104,19 +111,38 @@ public class LanguageManager {
         fileConfiguration.addDefault(NOT_BLOCK, "&cYour aren't holing a block!");
         fileConfiguration.addDefault(NOT_SOLID, "&cYour aren't holing a solid block!");
         fileConfiguration.addDefault(MINE_RESET, "&cMine resert successfully!");
-        fileConfiguration.addDefault(MINE_RESET_BROADCAST, "&B%mine% has reseted!");
+        fileConfiguration.addDefault(MINE_RESET_BROADCAST, "&B" + MINE_PLACEHOLDER + " has reseted!");
         fileConfiguration.addDefault(MINE_ALREADY_EXISTS, "&cMine already exists!");
         fileConfiguration.addDefault(MINE_DELETED, "&cMine deleted!");
-        fileConfiguration.addDefault(BLOCK_ADDED, "&b%item% added to %mine%. Total: %total%!");
-        fileConfiguration.addDefault(PERCENTAGE_GREATER_THAN_100, "&cPercentage can't be greater than 100. Total: %total%");
-        fileConfiguration.addDefault(BLOCK_REMOVED, "&b%item% removed to %mine%. Total: %total%!");
-        fileConfiguration.addDefault(MINE_DONT_HAVE_BLOCK, "&cThe %mine% doesn't contians the %block%!");
+        fileConfiguration.addDefault(BLOCK_ADDED, "&b" + BLOCK_PLACEHOLDER + " added to " + MINE_PLACEHOLDER + " Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
+        fileConfiguration.addDefault(PERCENTAGE_GREATER_THAN_100, "&cPercentage can't be greater than 100. Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
+        fileConfiguration.addDefault(BLOCK_REMOVED, "&b" + BLOCK_PLACEHOLDER + " removed to " + MINE_PLACEHOLDER + ". Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
+        fileConfiguration.addDefault(MINE_DONT_HAVE_BLOCK, "&cThe " + MINE_PLACEHOLDER + " doesn't contians the %block%!");
+        fileConfiguration.addDefault(INVALID_RESET_COOLDOWN, "&c invalid reset cooldown!");
         fileConfiguration.options().copyDefaults(true);
         return fileConfiguration;
     }
 
-    public static void send(CommandSender sender, String key) {
+    public static void sendKey(CommandSender sender, String key, Object... objects) {
         String message = instance.strings.get(key);
+        sendMessage(sender, message, objects);
+    }
+
+    public static void sendMessage(CommandSender sender, String message, Object... objects) {
+        message = replacePlaceHolders(message, objects);
         sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+    }
+
+    private static String replacePlaceHolders(String message, Object... objects) {
+        for(Object obj : objects) {
+            if(obj instanceof Mine && message.contains(MINE_PLACEHOLDER)) {
+                message = message.replace(MINE_PLACEHOLDER, ((Mine) obj).getName());
+            } else if(obj instanceof ItemStack && message.contains(BLOCK_PLACEHOLDER)) {
+                message = message.replace(BLOCK_PLACEHOLDER, ((ItemStack) obj).getType().toString());
+            } else if(obj instanceof Integer && message.contains(MINED_PERCENTAGE_PLACEHOLDER)) {
+                message = message.replace(MINED_PERCENTAGE_PLACEHOLDER, String.valueOf(obj));
+            }
+        }
+        return message;
     }
 }

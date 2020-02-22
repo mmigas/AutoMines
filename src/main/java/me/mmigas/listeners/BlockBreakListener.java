@@ -14,7 +14,7 @@ public class BlockBreakListener implements Listener {
     public void onBlockBreakEvent(BlockBreakEvent event) {
         for (int i = 0; i < mineController.getMinesList().size(); i++) {
             if (mineController.getMinesList().get(i).containsBlock(event.getBlock().getLocation())) {
-                mineController.getMinesList().get(i).updateTotalPercentage();
+                mineController.updateMinedPercentage(mineController.getMinesList().get(i));
                 return;
             }
         }

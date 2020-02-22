@@ -16,19 +16,19 @@ public class SetTeleportLocation {
 
    public boolean onCommand(CommandSender commandSender, String[] args) {
         if (!(commandSender instanceof Player)) {
-            LanguageManager.send(commandSender, LanguageManager.MUST_BE_A_PLAYER);
-            return true;
+            LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
+            return false;
         }
 
         if (args.length != 2) {
-            LanguageManager.send(commandSender, LanguageManager.WRONG_TELEPORT_USAGE);
+            LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_TELEPORT_USAGE);
             return true;
         }
 
         Player player = (Player) commandSender;
 
         if (!mineController.validateMine(args[1])) {
-            LanguageManager.send(player, LanguageManager.MINE_NOT_FOUND);
+            LanguageManager.sendKey(player, LanguageManager.MINE_NOT_FOUND);
             return true;
         }
 

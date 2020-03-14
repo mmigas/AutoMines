@@ -1,5 +1,6 @@
 package me.mmigas.commands.subcommands;
 
+import me.mmigas.commands.CMD;
 import me.mmigas.files.LanguageManager;
 import me.mmigas.gui.Menu;
 import me.mmigas.mines.Mine;
@@ -7,31 +8,31 @@ import me.mmigas.mines.MineController;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class MenuCMD {
-
-    private final MineController mineController;
-
+public class MenuCMD extends CMD {
     public MenuCMD(MineController mineController) {
-        this.mineController = mineController;
+        super(mineController);
     }
 
-    public boolean onCommand(CommandSender commandSender, String[] args) {
-        if(!(commandSender instanceof Player)) {
-            LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
-            return false;
+    @Override
+    public void onCommand(CommandSender commandSender, String[] args) {
+        if(invalidArgsLenght(args, 2)) {
+            LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_MENUCMD_USAGE);
+            return;
+        }
+        if(invalidPlayer(commandSender) || invalidateMine(args[1], commandSender)) {
+            return;
         }
 
         Player player = (Player) commandSender;
-
-        if(!mineController.validateMine(args[1])){
-            LanguageManager.sendKey(commandSender, LanguageManager.MINE_NOT_FOUND);
-            return true;
-        }
 
         Mine mine = mineController.getMine(args[1]);
 
         Menu menu = new Menu(mine, player);
         player.openInventory(menu.getCurrentInventory());
-        return true;
+    }
+
+    @Override
+    public String getLabel() {
+        return "menu";
     }
 }

@@ -20,7 +20,7 @@ public class Mine {
     private BlockVector3D minPosition, maxPosition;
     private Location teleportLocation;
 
-    private List<Conteiner> conteiners = new ArrayList<>();
+    private List<Container> containers = new ArrayList<>();
     private int total = 0;
 
     private List<Flags> flags = new ArrayList<>();
@@ -74,13 +74,15 @@ public class Mine {
 
     /**
      * Normal reset without any effect
+     *
      * @param materials
      */
     private void normalReset(List<Material> materials) {
+        int counter = 0;
         for(int z = 0; z < length; z++) {
             for(int y = 0; y < height; y++) {
                 for(int x = 0; x < width; x++) {
-                    world.getBlockAt(getMinPosition().getX() + x, getMinPosition().getY() + y, getMinPosition().getZ() + z).setType(materials.iterator().next());
+                    world.getBlockAt(getMinPosition().getX() + x, getMinPosition().getY() + y, getMinPosition().getZ() + z).setType(materials.get(counter++));
                 }
             }
         }
@@ -88,6 +90,7 @@ public class Mine {
 
     /**
      * Resets mine with the per block cooldown effect
+     *
      * @param materials
      */
     private void resetWithEffect(List<Material> materials) {
@@ -116,12 +119,13 @@ public class Mine {
         }.runTaskTimer(AutoMines.getInstance(), 0, resetEffectCooldown);
     }
 
-    public void updateResetTime(){
+    public void updateResetTime() {
         setResetTime(System.currentTimeMillis() + resetCooldown);
     }
 
     /**
      * Genererates the materials list for the new reset
+     *
      * @return ArrayList with all the blocks
      */
     private List<Material> generateMaterialsList() {
@@ -130,10 +134,9 @@ public class Mine {
         nextBlock:
         for(int i = 0; i < area; i++) {
             int probabilityGenerated = random.nextInt(100);
-
-            for(Conteiner conteiner : conteiners) {
-                if(probabilityGenerated < conteiner.getPercentage()) {
-                    materials.add(conteiner.getMaterial());
+            for(Container container : containers) {
+                if(probabilityGenerated < container.getPercentage()) {
+                    materials.add(container.getMaterial());
                     continue nextBlock;
                 }
             }
@@ -167,6 +170,7 @@ public class Mine {
 
     /**
      * Gets all the players currently inside the mine
+     *
      * @return ArrayList with all the players
      */
     public List<Player> playersInsideMine() {
@@ -219,8 +223,8 @@ public class Mine {
         return world;
     }
 
-    public List<Conteiner> getContent() {
-        return conteiners;
+    public List<Container> getContent() {
+        return containers;
     }
 
     public List<Flags> getFlags() {
@@ -315,11 +319,11 @@ public class Mine {
         return isReseting;
     }
 
-    public long getResetTime(){
+    public long getResetTime() {
         return resetTime;
     }
 
-    public void setResetTime(long resetTime){
+    public void setResetTime(long resetTime) {
         this.resetTime = resetTime;
     }
 }

@@ -14,31 +14,28 @@ import org.bukkit.entity.Player;
 public class Create extends CMD {
 
     private final WorldEditPlugin worldEditPlugin;
-    private final MineController mineController;
 
     public Create(WorldEditPlugin worldEditPlugin, MineController mineController) {
         super(mineController);
         this.worldEditPlugin = worldEditPlugin;
-        this.mineController = mineController;
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, String[] args) {
-        if(!(commandSender instanceof Player)) {
-            LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
-            return false;
+    public void onCommand(CommandSender commandSender, String[] args) {
+        if(invalidPlayer(commandSender)) {
+            return;
         }
 
         Player player = (Player) commandSender;
 
         if(args.length != 2) {
             LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_CREATE_USAGE);
-            return true;
+            return;
         }
 
         if(mineController.validateMine(args[1])) {
-            LanguageManager.sendKey(commandSender, LanguageManager.MINE_ALREADY_EXISTS);
-            return true;
+            LanguageManager.sendMessage(player, LanguageManager.MINE_ALREADY_EXISTS);
+            return;
         }
 
         Region selection = null;
@@ -57,8 +54,6 @@ public class Create extends CMD {
         }
 
         player.sendMessage("Created " + args[1]);
-
-        return true;
     }
 
     @Override

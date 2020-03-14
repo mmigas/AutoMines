@@ -7,24 +7,19 @@ import me.mmigas.mines.MineController;
 import org.bukkit.command.CommandSender;
 
 public class Delete extends CMD {
-
-    private final MineController mineController;
-
     public Delete(MineController mineController) {
         super(mineController);
-        this.mineController = mineController;
     }
 
     @Override
-    public boolean onCommand(CommandSender commandSender, String[] args) {
-        if(!validateArgsLenght(args, 2) || !validateMine(args[1], commandSender)) {
-            return true;
+    public void onCommand(CommandSender commandSender, String[] args) {
+        if(invalidArgsLenght(args, 2) || invalidateMine(args[1], commandSender)) {
+            return;
         }
         Mine mine = mineController.getMine(args[1]);
 
         mineController.deleteMine(mine);
         LanguageManager.sendKey(commandSender, LanguageManager.MINE_DELETED);
-        return true;
     }
 
     @Override

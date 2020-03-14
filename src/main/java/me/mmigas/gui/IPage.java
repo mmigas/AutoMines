@@ -1,6 +1,4 @@
-package me.mmigas.gui.pages;
-
-import me.mmigas.gui.Gui;
+package me.mmigas.gui;
 
 public interface IPage {
     void setup();

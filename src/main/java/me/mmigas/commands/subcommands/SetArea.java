@@ -5,6 +5,7 @@ import com.sk89q.worldedit.IncompleteRegionException;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.regions.Region;
+import me.mmigas.commands.CMD;
 import me.mmigas.files.LanguageManager;
 import me.mmigas.math.BlockVector3D;
 import me.mmigas.mines.Mine;
@@ -13,31 +14,30 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 
-public class SetArea {
+public class SetArea extends CMD {
 
     private final WorldEditPlugin worldEditPlugin;
-    private final MineController mineController;
 
     public SetArea(WorldEditPlugin worldEditPlugin, MineController mineController) {
+        super(mineController);
         this.worldEditPlugin = worldEditPlugin;
-        this.mineController = mineController;
     }
 
-    public boolean onCommand(CommandSender commandSender, String[] args) {
-        if (!(commandSender instanceof Player)) {
-            LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
-            return false;
+    @Override
+    public void onCommand(CommandSender commandSender, String[] args) {
+        if(invalidPlayer(commandSender)) {
+            return;
         }
 
         Player player = (Player) commandSender;
 
-        if (args.length != 2) {
-            LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_RESET_TIMER_USAGE);
+        if(invalidArgsLenght(args, 2)) {
+            LanguageManager.sendMessage(commandSender, LanguageManager.WRONG_SET_AREA_USAGE);
+            return;
         }
 
-        if (!mineController.validateMine(args[1])) {
-            LanguageManager.sendKey(commandSender, LanguageManager.MINE_NOT_FOUND);
-            return true;
+        if(invalidateMine(args[1], commandSender)) {
+            return;
         }
 
         Mine mine = mineController.getMine(args[1]);
@@ -49,7 +49,7 @@ public class SetArea {
             e.printStackTrace();
         }
 
-        if (selection != null && selection.getMinimumPoint() != null && selection.getMaximumPoint() != null) {
+        if(selection != null && selection.getMinimumPoint() != null && selection.getMaximumPoint() != null) {
             BlockVector3D minPosition = new BlockVector3D(selection.getMinimumPoint().getBlockX(), selection.getMinimumPoint().getBlockY(), selection.getMinimumPoint().getBlockZ());
             BlockVector3D maxPosition = new BlockVector3D(selection.getMaximumPoint().getBlockX(), selection.getMaximumPoint().getBlockY(), selection.getMaximumPoint().getBlockZ());
             mineController.setMineArea(mine, minPosition, maxPosition);
@@ -58,6 +58,10 @@ public class SetArea {
         }
 
         player.sendMessage("changed");
-        return true;
+    }
+
+    @Override
+    public String getLabel() {
+        return "area";
     }
 }

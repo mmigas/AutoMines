@@ -8,36 +8,35 @@ import org.bukkit.command.CommandSender;
 
 public class Info extends CMD {
 
-
-    private MineController mineController;
-
     public Info(MineController mineController) {
         super(mineController);
-        this.mineController = mineController;
     }
 
-    public boolean onCommand(CommandSender commandSender, String[] args) {
-        if(!validateArgsLenght(args, 2)) {
-            return true;
+    @Override
+    public void onCommand(CommandSender commandSender, String[] args) {
+        if(invalidArgsLenght(args, 2)) {
+            return;
         }
 
-        if(!validateMine(args[1], commandSender)){
-            return true;
+        if(invalidateMine(args[1], commandSender)) {
+            return;
         }
 
         Mine mine = mineController.getMine(args[1]);
-
-        String message = "&d=================================" + "&b" + args[1] + "%mine%'s info: \n" +
+        String message = "&d=================================" + "&b %mine%'s info: \n" +
                 "Reset Timer: " + mine.getResetCooldown() +
-                "Reset Percentage: " + mine.getResetPercentage() +
+                "\nReset Percentage: " + mine.getResetPercentage() +
                 "\nDimensions: " +
                 mine.getDimensions() +
                 "\nBlock List: " +
                 mine.getBlockList() +
                 "&d=================================";
         LanguageManager.sendMessage(commandSender, message, mine);
+    }
 
-        return true;
+    @Override
+    public String getLabel() {
+        return "info";
     }
 }
 

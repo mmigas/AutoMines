@@ -1,6 +1,7 @@
 package me.mmigas.gui;
 
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.jetbrains.annotations.NotNull;
@@ -20,6 +21,11 @@ public class Gui implements InventoryHolder {
         this.title = title;
     }
 
+    public void forceItem(Player player, int position, Item item) {
+        setItem(position, item);
+        player.getOpenInventory().getTopInventory().setItem(position, item.getItemStack());
+    }
+
     public void setItem(int position, Item item) {
         items.put(position, item);
     }
@@ -30,11 +36,11 @@ public class Gui implements InventoryHolder {
 
     @Override
     public @NotNull Inventory getInventory() {
-        Inventory iventory = Bukkit.createInventory(this, size, title);
+        Inventory inventory = Bukkit.createInventory(this, size, title);
 
-        for(Map.Entry<Integer, Item> entry : items.entrySet()){
-            iventory.setItem(entry.getKey(), entry.getValue().getItemStack());
+        for(Map.Entry<Integer, Item> entry : items.entrySet()) {
+            inventory.setItem(entry.getKey(), entry.getValue().getItemStack());
         }
-        return iventory;
+        return inventory;
     }
 }

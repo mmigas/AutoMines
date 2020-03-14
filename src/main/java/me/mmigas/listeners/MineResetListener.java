@@ -16,8 +16,8 @@ public class MineResetListener implements Listener {
 
     @EventHandler
     public void OnMineResetEvent(MineResetEvent event) {
-        Utils.broadcoast(LanguageManager.MINE_RESET_BROADCAST);
         Mine mine = event.getMine();
+        Utils.broadcoast(LanguageManager.MINE_RESET_BROADCAST, mine);
 
         if (mine.getFlags().contains(Flags.TeleportLocation)) {
             teleportPlayersTeleportLocation(mine);

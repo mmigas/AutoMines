@@ -2,7 +2,7 @@ package me.mmigas.files;
 
 import me.mmigas.AutoMines;
 import me.mmigas.math.BlockVector3D;
-import me.mmigas.mines.Conteiner;
+import me.mmigas.mines.Container;
 import me.mmigas.mines.Flags;
 import me.mmigas.mines.Mine;
 import me.mmigas.mines.MineController;
@@ -93,7 +93,7 @@ public class MineStorage {
 
                 if(fileConfiguration.contains(CONTENT)) {
                     for(String string : Objects.requireNonNull(fileConfiguration.getConfigurationSection(CONTENT)).getKeys(false)) {
-                        mine.getContent().add(new Conteiner(Material.getMaterial(string), fileConfiguration.getInt(CONTENT + "." + string)));
+                        mine.getContent().add(new Container(Material.getMaterial(string), fileConfiguration.getInt(CONTENT + "." + string)));
                     }
                 }
 
@@ -159,8 +159,8 @@ public class MineStorage {
         }
 
         if(!mine.getContent().isEmpty()) {
-            for(Conteiner conteiner : mine.getContent()) {
-                fileConfiguration.addDefault(CONTENT + "." + conteiner.getMaterial(), conteiner.getPercentage());
+            for(Container container : mine.getContent()) {
+                fileConfiguration.addDefault(CONTENT + "." + container.getMaterial(), container.getPercentage());
             }
         }
 

@@ -20,6 +20,7 @@ public class AutoMines extends JavaPlugin {
 	private WorldEditPlugin worldEditPlugin;
 	private MineController mineController;
 	private MineStorage mineStorage;
+	private AutoMinesCommands commands;
 
 	@Override
 	public void onEnable(){
@@ -50,7 +51,8 @@ public class AutoMines extends JavaPlugin {
     }
 
 	private void registerCommands(){
-		Objects.requireNonNull(this.getCommand("AutoMines")).setExecutor(new AutoMinesCommands());
+	    commands = new AutoMinesCommands();
+		Objects.requireNonNull(this.getCommand("AutoMines")).setExecutor(commands);
 	}
 
     public static AutoMines getInstance(){
@@ -67,6 +69,10 @@ public class AutoMines extends JavaPlugin {
 
 	public MineStorage getMineStorage(){
 	    return mineStorage;
+    }
+
+    public AutoMinesCommands getCommands(){
+	    return commands;
     }
 
 }

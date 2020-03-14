@@ -17,20 +17,32 @@ import java.util.Set;
 
 public class LanguageManager {
 
+
     public static final String CREATE_USAGE = "&b/AutoMines create (mine)";
     public static final String DELETE_USAGE = "&b/AutoMines delete (mine)";
-    public static final String SET_AREA_USAGE = "&b/AutoMines setArea (mine)";
-    public static final String CHANGE_BLOCK_USAGE = "&b/AutoMines block (mine) (percentage)";
     public static final String RESET_USAGE = "&b/AutoMines reset (mine)";
-    public static final String RESET_TIMER_USAGE = "&b/AutoMines resetTimer (mine)";
+    public static final String SET_AREA_USAGE = "&b/AutoMines area (mine)";
+    public static final String BLOCK_USAGE = "&b/AutoMines block (mine) (percentage)";
+    public static final String REMOVE_USAGE = "&b/AutoMines remove (mine)";
+    public static final String CHANGE_TIMER_USAGE = "&b/AutoMines changetimer (mine)";
+    public static final String TELEPORT_USAGE = "&b/AutoMines tp (mine)";
+    public static final String TIMER_USAGE = "&b/AutoMines timer (mine)";
+    public static final String INFO_USAGE = "&b/AutoMines info (mine)";
+    public static final String MENU_USAGE = "&b/AutoMines menu (mine)";
+
+    public static final String[] ALL_USAGES = new String[]{CREATE_USAGE, DELETE_USAGE, RESET_USAGE, SET_AREA_USAGE, BLOCK_USAGE, REMOVE_USAGE, CHANGE_TIMER_USAGE, TELEPORT_USAGE, TIMER_USAGE, INFO_USAGE, MENU_USAGE};
 
     public static final String WRONG_CREATE_USAGE = "&cWrong command usage please use: /AutoMines create (mine)";
     public static final String WRONG_DELETE_USAGE = "&cWrong command usage please use: /AutoMines delete (mine)";
     public static final String WRONG_CHANGE_BLOCK_USAGE = "&cWrong command usage please use: /AutoMines block (mine) (percentage)";
+    public static final String WRONG_REMOVE_BLOCK_USAGE = "&cWrong command usage please use: /AutoMines remove (mine)";
     public static final String WRONG_RESET_USAGE = "&cWrong command usage please use: /AutoMines reset (mine)";
     public static final String WRONG_RESET_TIMER_USAGE = "&cWrong command usage please use: /AutoMines timer (mine) (time)";
-    public static final String WRONG_INFO_USAGE = "&cWrong usage please use: /AutoMines info (mine)";
-    public static final String WRONG_TELEPORT_USAGE = "&cWrong usage please use: /AutoMine teleport (mine)";
+    public static final String WRONG_INFO_USAGE = "&cWrong command usage please use: /AutoMines info (mine)";
+    public static final String WRONG_TELEPORT_USAGE = "&cWrong command usage please use: /AutoMine teleport (mine)";
+    public static final String WRONG_MENUCMD_USAGE = "&cWrong command usage please use: /AutoMine menu (mine)";
+    public static final String WRONG_SET_AREA_USAGE = "&cWrong command usage please use: /AutoMines area (mine)";
+    ;
 
     public static final String MINE_NOT_FOUND = "mine-not-found";
     public static final String EMPTY_HAND = "empty-hand";
@@ -44,9 +56,12 @@ public class LanguageManager {
     public static final String BLOCK_REMOVED = "block-removed";
     public static final String MINE_DONT_HAVE_BLOCK = "mine-dont-have-block";
     public static final String PERCENTAGE_GREATER_THAN_100 = "percentage-grater-than-100";
-    public static final String INVALID_RESET_COOLDOWN = "invalid-reset-cooldown";
+    public static final String INVALID_RESET_TIMER = "invalid-reset-timer";
+    public static final String RESET_TIMER_CHANGED = "reset-timer-changed";
+    public static final String RESET_TIMER_START = "reset-timer-start";
+    public static final String RESET_TIMER_STOP = "reset-timer-stop";
 
-    public static final String MUST_BE_A_PLAYER = "&cYou must be a player to executar that command!";
+    public static final String MUST_BE_A_PLAYER = "&cYou must be a player to execute that command!";
     public static final String INVALID_COMMAND = "&cInvalid Command!";
 
     private static final String MINE_PLACEHOLDER = "%mine%";
@@ -111,14 +126,14 @@ public class LanguageManager {
         fileConfiguration.addDefault(NOT_BLOCK, "&cYour aren't holing a block!");
         fileConfiguration.addDefault(NOT_SOLID, "&cYour aren't holing a solid block!");
         fileConfiguration.addDefault(MINE_RESET, "&cMine resert successfully!");
-        fileConfiguration.addDefault(MINE_RESET_BROADCAST, "&B" + MINE_PLACEHOLDER + " has reseted!");
+        fileConfiguration.addDefault(MINE_RESET_BROADCAST, "&b" + MINE_PLACEHOLDER + " has reseted!");
         fileConfiguration.addDefault(MINE_ALREADY_EXISTS, "&cMine already exists!");
         fileConfiguration.addDefault(MINE_DELETED, "&cMine deleted!");
         fileConfiguration.addDefault(BLOCK_ADDED, "&b" + BLOCK_PLACEHOLDER + " added to " + MINE_PLACEHOLDER + " Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
         fileConfiguration.addDefault(PERCENTAGE_GREATER_THAN_100, "&cPercentage can't be greater than 100. Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
         fileConfiguration.addDefault(BLOCK_REMOVED, "&b" + BLOCK_PLACEHOLDER + " removed to " + MINE_PLACEHOLDER + ". Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
         fileConfiguration.addDefault(MINE_DONT_HAVE_BLOCK, "&cThe " + MINE_PLACEHOLDER + " doesn't contians the %block%!");
-        fileConfiguration.addDefault(INVALID_RESET_COOLDOWN, "&c invalid reset cooldown!");
+        fileConfiguration.addDefault(INVALID_RESET_TIMER, "&c invalid reset cooldown!");
         fileConfiguration.options().copyDefaults(true);
         return fileConfiguration;
     }
@@ -138,7 +153,7 @@ public class LanguageManager {
             if(obj instanceof Mine && message.contains(MINE_PLACEHOLDER)) {
                 message = message.replace(MINE_PLACEHOLDER, ((Mine) obj).getName());
             } else if(obj instanceof ItemStack && message.contains(BLOCK_PLACEHOLDER)) {
-                message = message.replace(BLOCK_PLACEHOLDER, ((ItemStack) obj).getType().toString());
+                message = message.replace(BLOCK_PLACEHOLDER, obj.toString());
             } else if(obj instanceof Integer && message.contains(MINED_PERCENTAGE_PLACEHOLDER)) {
                 message = message.replace(MINED_PERCENTAGE_PLACEHOLDER, String.valueOf(obj));
             }

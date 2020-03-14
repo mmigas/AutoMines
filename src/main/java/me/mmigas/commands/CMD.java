@@ -7,33 +7,33 @@ import org.bukkit.entity.Player;
 
 public abstract class CMD {
 
-    private final MineController mineController;
+    protected final MineController mineController;
 
     public CMD(MineController mineController) {
         this.mineController = mineController;
     }
 
-    public boolean validatePlayer(CommandSender commandSender){
-        if(commandSender instanceof Player){
-            LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
-            return true;
-        }
-        return false;
-    }
-
-    public boolean validateArgsLenght(String[] args, int length) {
-        return args.length == length;
-    }
-
-    public boolean validateMine(String mineName, CommandSender commandSender) {
-        if(!mineController.validateMine(mineName)) {
-            LanguageManager.sendKey(commandSender, LanguageManager.MINE_NOT_FOUND);
+    public boolean invalidPlayer(CommandSender commandSender) {
+        if(commandSender instanceof Player) {
             return false;
         }
-
+        LanguageManager.sendMessage(commandSender, LanguageManager.MUST_BE_A_PLAYER);
         return true;
     }
 
-    public abstract boolean onCommand(CommandSender commandSender, String[] args);
+    public boolean invalidArgsLenght(String[] args, int length) {
+        return args.length != length;
+    }
+
+    public boolean invalidateMine(String mineName, CommandSender commandSender) {
+        if(mineController.validateMine(mineName)) {
+            return false;
+        }
+
+        LanguageManager.sendKey(commandSender, LanguageManager.MINE_NOT_FOUND);
+        return true;
+    }
+
+    public abstract void onCommand(CommandSender commandSender, String[] args);
     public abstract String getLabel();
 }

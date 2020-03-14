@@ -9,21 +9,21 @@ import org.bukkit.inventory.ItemStack;
 
 public final class Utils {
 
-    private Utils(){
+    private Utils() {
 
     }
 
     public static Material getSolidBlockInPlayersHand(Player player) {
         ItemStack itemHolding = player.getInventory().getItemInMainHand();
-        if (itemHolding.getType().equals(org.bukkit.Material.AIR)) {
+        if(itemHolding.getType().equals(org.bukkit.Material.AIR)) {
             LanguageManager.sendKey(player, LanguageManager.EMPTY_HAND);
             return null;
         }
-        if (!itemHolding.getType().isBlock()) {
+        if(!itemHolding.getType().isBlock()) {
             LanguageManager.sendKey(player, LanguageManager.NOT_BLOCK);
             return null;
         }
-        if (!itemHolding.getType().isSolid()) {
+        if(!itemHolding.getType().isSolid()) {
             LanguageManager.sendKey(player, LanguageManager.NOT_SOLID);
             return null;
         }
@@ -31,10 +31,9 @@ public final class Utils {
         return itemHolding.getType();
     }
 
-    public static void broadcoast(String message) {
-        for (Player player : Bukkit.getOnlinePlayers()) {
-            LanguageManager.sendKey(player, message);
+    public static void broadcoast(String message, Object... obj) {
+        for(Player player : Bukkit.getOnlinePlayers()) {
+            LanguageManager.sendKey(player, message, obj);
         }
     }
-
 }

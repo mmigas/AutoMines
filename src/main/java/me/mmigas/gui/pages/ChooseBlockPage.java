@@ -10,7 +10,7 @@ import org.bukkit.Material;
 public class ChooseBlockPage extends CompositionPages {
     public ChooseBlockPage(Menu menu, Mine mine) {
         super(menu, mine);
-        this.gui = new Gui(mine.getName() + " choose block", compositionRows * 9 + 9);
+        gui = new Gui(mine.getName() + " choose block", compositionRows * 9 + 9);
     }
 
     @Override

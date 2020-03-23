@@ -66,7 +66,7 @@ public class LanguageManager {
 
     private static final String MINE_PLACEHOLDER = "%mine%";
     private static final String BLOCK_PLACEHOLDER = "%block%";
-    private static final String MINED_PERCENTAGE_PLACEHOLDER = "%mined%";
+    private static final String MINE_TOTAL_PERCENTAGE_PLACEHOLDER = "%mined%";
 
     private static final String FILE = "language.yml";
 
@@ -88,7 +88,7 @@ public class LanguageManager {
     private void save(FileConfiguration fileConfiguration) {
         File languageFile = new File(plugin.getDataFolder(), FILE);
 
-        if(languageFile.exists()) {
+        if (languageFile.exists()) {
             return;
         }
 
@@ -108,7 +108,7 @@ public class LanguageManager {
             fileConfiguration.load(languageFile);
 
             Set<String> keys = fileConfiguration.getKeys(false);
-            for(String key : keys) {
+            for (String key : keys) {
                 String value = fileConfiguration.getString(key);
                 strings.put(key, value);
             }
@@ -129,10 +129,10 @@ public class LanguageManager {
         fileConfiguration.addDefault(MINE_RESET_BROADCAST, "&b" + MINE_PLACEHOLDER + " has reseted!");
         fileConfiguration.addDefault(MINE_ALREADY_EXISTS, "&cMine already exists!");
         fileConfiguration.addDefault(MINE_DELETED, "&cMine deleted!");
-        fileConfiguration.addDefault(BLOCK_ADDED, "&b" + BLOCK_PLACEHOLDER + " added to " + MINE_PLACEHOLDER + " Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
-        fileConfiguration.addDefault(PERCENTAGE_GREATER_THAN_100, "&cPercentage can't be greater than 100. Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
-        fileConfiguration.addDefault(BLOCK_REMOVED, "&b" + BLOCK_PLACEHOLDER + " removed to " + MINE_PLACEHOLDER + ". Total: " + MINED_PERCENTAGE_PLACEHOLDER + "!");
-        fileConfiguration.addDefault(MINE_DONT_HAVE_BLOCK, "&cThe " + MINE_PLACEHOLDER + " doesn't contians the %block%!");
+        fileConfiguration.addDefault(BLOCK_ADDED, "&b" + BLOCK_PLACEHOLDER + " added to " + MINE_PLACEHOLDER + " Total: " + MINE_TOTAL_PERCENTAGE_PLACEHOLDER + "!");
+        fileConfiguration.addDefault(PERCENTAGE_GREATER_THAN_100, "&cPercentage can't be greater than 100. Total: " + MINE_TOTAL_PERCENTAGE_PLACEHOLDER + "!");
+        fileConfiguration.addDefault(BLOCK_REMOVED, "&b" + BLOCK_PLACEHOLDER + " removed to " + MINE_PLACEHOLDER + ". Total: " + MINE_TOTAL_PERCENTAGE_PLACEHOLDER + "!");
+        fileConfiguration.addDefault(MINE_DONT_HAVE_BLOCK, "&cThe " + MINE_PLACEHOLDER + " doesn't contians the " + BLOCK_PLACEHOLDER + "!");
         fileConfiguration.addDefault(INVALID_RESET_TIMER, "&c invalid reset cooldown!");
         fileConfiguration.options().copyDefaults(true);
         return fileConfiguration;
@@ -149,13 +149,17 @@ public class LanguageManager {
     }
 
     private static String replacePlaceHolders(String message, Object... objects) {
-        for(Object obj : objects) {
-            if(obj instanceof Mine && message.contains(MINE_PLACEHOLDER)) {
-                message = message.replace(MINE_PLACEHOLDER, ((Mine) obj).getName());
-            } else if(obj instanceof ItemStack && message.contains(BLOCK_PLACEHOLDER)) {
+        for (Object obj : objects) {
+            if (obj instanceof Mine) {
+                if (message.contains(MINE_PLACEHOLDER)) {
+                    message = message.replace(MINE_PLACEHOLDER, ((Mine) obj).getName());
+                }
+                if (message.contains(MINE_TOTAL_PERCENTAGE_PLACEHOLDER)) {
+                    message = message.replace(MINE_TOTAL_PERCENTAGE_PLACEHOLDER, String.valueOf(obj));
+                }
+
+            } else if (obj instanceof ItemStack && message.contains(BLOCK_PLACEHOLDER)) {
                 message = message.replace(BLOCK_PLACEHOLDER, obj.toString());
-            } else if(obj instanceof Integer && message.contains(MINED_PERCENTAGE_PLACEHOLDER)) {
-                message = message.replace(MINED_PERCENTAGE_PLACEHOLDER, String.valueOf(obj));
             }
         }
         return message;

@@ -9,9 +9,9 @@ import java.util.List;
 
 public class Item {
 
-    public final ItemStack itemStack;
+    private final ItemStack itemStack;
 
-    public final List<IClickAction> IClickActions = new ArrayList<>();
+    private final List<IClickAction> IClickActions = new ArrayList<>();
 
     public Item(Material material) {
         this.itemStack = new ItemStack(material);

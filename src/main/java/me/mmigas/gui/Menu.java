@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class Menu {
 
-    final Map<PageId, IPage> pages = new EnumMap<>(PageId.class);
+    final Map<PageId, Page> pages = new EnumMap<>(PageId.class);
 
     private PageId currentPage = PageId.MAIN;
 
@@ -39,6 +39,8 @@ public class Menu {
         pages.get(PageId.PERCENTAGE_PAGE).setup();
         pages.put(PageId.RESET_PAGE, new ResetPage(this, mine));
         pages.get(PageId.RESET_PAGE).setup();
+        pages.put(PageId.RESET_TIMER_SETTINGS, new ResetTimerSettings(this, mine));
+        pages.get(PageId.RESET_TIMER_SETTINGS).setup();
         pages.put(PageId.MINED_PERCENTAGE_PAGE, new MinedPercentagePage(this, mine));
         pages.get(PageId.MINED_PERCENTAGE_PAGE).setup();
     }
@@ -69,7 +71,7 @@ public class Menu {
         player.closeInventory();
     }
 
-    public Map<PageId, IPage> getPages() {
+    public Map<PageId, Page> getPages() {
         return pages;
     }
 

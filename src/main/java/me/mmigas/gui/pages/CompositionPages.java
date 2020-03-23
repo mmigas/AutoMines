@@ -1,7 +1,6 @@
 package me.mmigas.gui.pages;
 
 import me.mmigas.gui.Gui;
-import me.mmigas.gui.IPage;
 import me.mmigas.gui.Item;
 import me.mmigas.gui.Menu;
 import me.mmigas.mines.Mine;
@@ -13,17 +12,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CompositionPages implements IPage {
-    Gui gui;
-    Menu menu;
-    Mine mine;
+public abstract class CompositionPages extends Page {
     int compositionRows;
 
     public CompositionPages(Menu menu, Mine mine) {
-        this.menu = menu;
-        this.mine = mine;
+        super(menu, mine);
         compositionRows = mine.getContent().size() / 9 + 1;
-        this.gui = new Gui(mine.getName() + " composition", compositionRows * 9 + 9);
+        gui = new Gui(mine.getName() + " composition", compositionRows * 9 + 9);
     }
 
     public void updateContent() {
@@ -52,10 +47,5 @@ public abstract class CompositionPages implements IPage {
             }
         }
         return materials;
-    }
-
-    @Override
-    public Gui getGui() {
-        return gui;
     }
 }

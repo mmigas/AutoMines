@@ -17,17 +17,17 @@ public abstract class Block extends CMD {
 
     void changeBlock(Player player, Mine mine, Material material, int percentage) {
         if(!mineController.changeBlock(mine, material, percentage)) {
-            LanguageManager.sendKey(player, LanguageManager.PERCENTAGE_GREATER_THAN_100);
+            LanguageManager.sendKey(player, LanguageManager.PERCENTAGE_GREATER_THAN_100, mine);
             return;
         }
-        LanguageManager.sendKey(player, LanguageManager.BLOCK_ADDED);
+        LanguageManager.sendKey(player, LanguageManager.BLOCK_ADDED, mine, material);
     }
 
     void addBlock(Player player, Mine mine, Material material, int percentage) {
         if(!mineController.addBlock(mine, material, percentage)) {
-            LanguageManager.sendKey(player, LanguageManager.PERCENTAGE_GREATER_THAN_100);
+            LanguageManager.sendKey(player, LanguageManager.PERCENTAGE_GREATER_THAN_100, mine);
             return;
         }
-        LanguageManager.sendKey(player, LanguageManager.BLOCK_ADDED, mine, material, percentage);
+        LanguageManager.sendKey(player, LanguageManager.BLOCK_ADDED, mine, material);
     }
 }

@@ -50,9 +50,4 @@ public class UpdateCompositionPage extends CompositionPages {
 
         player.sendMessage("Content updated");
     }
-
-    @Override
-    public Gui getGui() {
-        return gui;
-    }
 }

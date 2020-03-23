@@ -10,16 +10,12 @@ import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class PercentagePage implements IPage {
-    private final Gui gui;
+public class PercentagePage extends Page {
     private int percentage = -1;
-    private Menu menu;
     private Material material;
-    private Mine mine;
 
     public PercentagePage(Menu menu, Mine mine) {
-        this.menu = menu;
-        this.mine = mine;
+        super(menu, mine);
         gui = new Gui(mine.getName() + " Change percentage", 27);
     }
 
@@ -46,21 +42,12 @@ public class PercentagePage implements IPage {
     }
 
     private void savePercentage(Player player) {
-        if(!AutoMines.getInstance().getMineController().changeBlock(mine, material, percentage)) {
-            LanguageManager.sendKey(player, LanguageManager.PERCENTAGE_GREATER_THAN_100);
-            return;
-        }
-        LanguageManager.sendKey(player, LanguageManager.BLOCK_ADDED);
+        AutoMines.getInstance().getCommands().guiCommand(player, new String[]{"blockgui", mine.getName(), material.toString(), String.valueOf(percentage)});
     }
 
     public void setMaterial(Player player, @NotNull Container container) {
         this.material = container.getMaterial();
         gui.forceItem(player, 4, new Item(container.getMaterial(), ChatColor.BLUE + String.valueOf(container.getPercentage())));
         percentage = container.getPercentage();
-    }
-
-    @Override
-    public Gui getGui() {
-        return gui;
     }
 }

@@ -44,9 +44,9 @@ public class RemovePlayer extends CMD {
             return;
         if(mineController.containsMateiral(mine, material)) {
             mineController.removeBlock(mine, material);
-            LanguageManager.sendKey(player, LanguageManager.BLOCK_REMOVED, mine, material, mine.getMinedPercentage());
+            LanguageManager.sendKey(player, LanguageManager.BLOCK_REMOVED, mine, material);
         } else {
-            LanguageManager.sendKey(player, LanguageManager.MINE_DONT_HAVE_BLOCK, mine);
+            LanguageManager.sendKey(player, LanguageManager.MINE_DONT_HAVE_BLOCK, mine, material);
         }
     }
 
